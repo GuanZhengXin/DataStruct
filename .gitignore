@@ -1,0 +1,12 @@
+.dtbcache
+.suo
+db.lock
+storage.ide
+storage.ide-shm
+storage.ide-wal
+
+/.vs
+/Common/obj
+/Common/bin
+/DataStruct/obj
+/DataStruct/bin
