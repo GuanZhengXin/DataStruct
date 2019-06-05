@@ -5,7 +5,7 @@ using System.Linq;
 namespace Common
 {
     /// <summary>
-    /// 数组线性表
+    /// 基础数组
     /// </summary>
     public class Array<T>
     {

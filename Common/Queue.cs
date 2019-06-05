@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Common
 {
+    /// <summary>
+    /// 基于数组的队列
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IQueue<T>
     {
         int GetSize();

@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Common
 {
+    /// <summary>
+    /// 栈
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IStack<T>
     {
         void Push(T value);

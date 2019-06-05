@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Common
 {
+    /// <summary>
+    /// 循环队列
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LoopQueue<T> : IQueue<T>
     {
         private T[] Data { get; set; }

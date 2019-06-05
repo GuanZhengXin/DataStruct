@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Common
 {
+    /// <summary>
+    /// 链表
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LinkNode<T>
     {
         private class Node
@@ -110,6 +114,16 @@ namespace Common
             delNode.Next = null;
             this.Size--;
             return delNode.Value;
+        }
+
+        public T DeleteFirst()
+        {
+            return this.Delete(0);
+        }
+
+        public T  DeleteLast()
+        {
+            return this.Delete(this.Size-1);
         }
 
         public int GetSize()
