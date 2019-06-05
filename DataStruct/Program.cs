@@ -8,15 +8,14 @@ namespace DataStruct
     {
         static void Main(string[] args)
         {
-            var nodeList = new LinkNode<int>();
+            var nodeList = new LinkNodeQueue<int>();
             for (int i = 0; i < 5; i++)
             {
-                nodeList.AddFirst(i);
+                nodeList.EnQueue(i);
             }
-            nodeList.Add(2, 666);
-            nodeList.Delete(0);
+            nodeList.DeQueue();
+            nodeList.EnQueue(100);
             Console.WriteLine(nodeList);
-            Console.WriteLine(nodeList.GetLast());
             Console.ReadKey();
         }
 
