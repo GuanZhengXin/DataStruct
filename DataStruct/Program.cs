@@ -8,14 +8,12 @@ namespace DataStruct
     {
         static void Main(string[] args)
         {
-            var nodeList = new LinkNodeQueue<int>();
-            for (int i = 0; i < 5; i++)
-            {
-                nodeList.EnQueue(i);
-            }
-            nodeList.DeQueue();
-            nodeList.EnQueue(100);
-            Console.WriteLine(nodeList);
+            Student a = new Student("A", 12, '1');
+            Student b = new Student("B", 12, '1');
+            if(a.Age.Equals(b.Age))
+                Console.WriteLine("相同");
+            else
+                Console.WriteLine("不同");
             Console.ReadKey();
         }
 
@@ -40,6 +38,32 @@ namespace DataStruct
                 }
             }
             return stack.Count==0;
+        }
+
+        public class Student : IComparable
+        {
+            public Student(string name, int age, char gender)
+            {
+                Name = name;
+                Age = age;
+                Gender = gender;
+            }
+
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public char Gender { get; set; }
+
+            public int CompareTo(object obj)
+            {
+                var stu = obj as Student;
+                return this.Age - stu.Age;
+            }
+
+            public override bool Equals(object obj)
+            {
+                var stu = obj as Student;
+                return this.Age == stu.Age;
+            }
         }
     }
 }
