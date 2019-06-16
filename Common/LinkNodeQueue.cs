@@ -54,7 +54,7 @@ namespace Common
             this.Size++;
         }
 
-        public void DeQueue()
+        public T DeQueue()
         {
             if (IsEmpty())
                 throw new Exception("queue is empty");
@@ -62,6 +62,7 @@ namespace Common
             DummyHead.Next = delNode.Next;
             delNode.Next = null;
             this.Size--;
+            return delNode.Value;
         }
 
         public T Peek()

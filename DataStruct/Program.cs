@@ -8,12 +8,14 @@ namespace DataStruct
     {
         static void Main(string[] args)
         {
-            Student a = new Student("A", 12, '1');
-            Student b = new Student("B", 12, '1');
-            if(a.Age.Equals(b.Age))
-                Console.WriteLine("相同");
-            else
-                Console.WriteLine("不同");
+            var bst = new BinarySearchTree<int>();
+            var numbers = new int[] { 10,5,2,7,6,4,1,8,15,20,12,11,17,13,22,18,19 };
+            foreach (var number in numbers)
+            {
+                bst.Add(number);
+            }
+            bst.LayerTraverse();
+            Console.WriteLine(bst.GetDepth());
             Console.ReadKey();
         }
 

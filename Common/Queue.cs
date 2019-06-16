@@ -13,21 +13,21 @@ namespace Common
         int GetSize();
         bool IsEmpty();
         void EnQueue(T value);
-        void DeQueue();
+        T DeQueue();
         T Peek();
     }
 
     public class Queue<T> : IQueue<T>
     {
         private Array<T> Data;
-        public Queue(int capacity)
+        public Queue(int capacity=20)
         {
             this.Data = new Array<T>(capacity);
         }
 
-        public void DeQueue()
+        public T DeQueue()
         {
-            this.Data.Delete(0);
+            return this.Data.Delete(0);
         }
 
         public void EnQueue(T value)

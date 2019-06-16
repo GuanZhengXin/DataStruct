@@ -24,12 +24,14 @@ namespace Common
             return this.Data.Length - 1;
         }
 
-        public void DeQueue()
+        public T DeQueue()
         {
+            var type = Data[Front];
             Data[Front] = default;
             Front = (Front + 1) % this.Data.Length;
             if (this.Size == this.GetCapacity() / 4)
                 this.ReSize(this.GetCapacity() / 2);
+            return type;
         }
 
         public void EnQueue(T value)
