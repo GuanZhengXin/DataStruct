@@ -222,26 +222,6 @@ namespace Common
             return currentNode.Value;
         }
 
-        public int GetDepth()
-        {
-            //int depth = 0;
-            //var queue = new Queue<Node>();
-            //queue.EnQueue(Root);
-            //if (Root == null)
-            //    return 0;
-            //depth++;
-            //while (!queue.IsEmpty())
-            //{
-            //    var currentNode = queue.DeQueue();
-            //    if (currentNode.Left != null)
-            //        queue.EnQueue(currentNode.Left);
-            //    if (currentNode.Right != null )
-            //        queue.EnQueue(currentNode.Right);
-            //}
-            //return depth;
-            return 0;
-        }
-
         public int GetRank(T value)
         {
             var nums = new List<T>();

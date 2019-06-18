@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using Common;
 
 namespace DataStruct
@@ -8,14 +10,15 @@ namespace DataStruct
     {
         static void Main(string[] args)
         {
-            var bst = new BinarySearchTree<int>();
-            var numbers = new int[] { 10,5,2,7,6,4,1,8,15,20,12,11,17,13,22,18,19 };
-            foreach (var number in numbers)
-            {
-                bst.Add(number);
-            }
-            bst.LayerTraverse();
-            Console.WriteLine(bst.GetDepth());
+            //var bst = new BinarySearchTree<int>();
+            //var numbers = new int[] { 10,5,2,7,6,4,1,8,15,20,12,11,17,13,22,18,19 };
+            //foreach (var number in numbers)
+            //{
+            //    bst.Add(number);
+            //}
+            //bst.LayerTraverse();
+
+            Console.WriteLine('g'-'a');
             Console.ReadKey();
         }
 
@@ -40,6 +43,22 @@ namespace DataStruct
                 }
             }
             return stack.Count==0;
+        }
+
+        public static int UniqueMorseRepresentations(string[] words)
+        {
+            var codes = new string[] { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." };
+            SortedSet<string> set = new SortedSet<string>();
+            foreach (var word in words)
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < word.Length; i++)
+                {
+                    stringBuilder.Append(codes[word.ToCharArray()[i] - 'a']);
+                }
+                set.Add(stringBuilder.ToString());
+            }
+            return set.Count;
         }
 
         public class Student : IComparable

@@ -116,6 +116,19 @@ namespace Common
             return delNode.Value;
         }
 
+        public void Delete(T value)
+        {
+            this.DummyHead.Next = DeleteValue(DummyHead.Next, value)
+;        }
+
+        private Node DeleteValue(Node node,T value)
+        {
+            if (node == null)
+                return null;
+            node.Next = DeleteValue(node.Next, value);
+            return node.Value.Equals(value) ? node.Next : node;
+        }
+
         public T DeleteFirst()
         {
             return this.Delete(0);

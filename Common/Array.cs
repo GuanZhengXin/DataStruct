@@ -78,9 +78,20 @@ namespace Common
             }
             this.SetEmpty(this.Size-1);
             this.Size--;
-            //if (this.Size <= this.Capacity/4)
-            //    this.ExpandCapacity(this.Capacity / 2);
+            if (this.Size <= this.Capacity/4)
+               this.NarrowCapacity(this.Capacity / 2);
             return value;
+        }
+
+        private void NarrowCapacity(int capacity)
+        {
+            var newData = new T[capacity];
+            for (int i = 0; i < this.Data.Length; i++)
+            {
+                newData[i] = this.Data[i];
+            }
+            this.Data = newData;
+            this.Capacity = capacity;
         }
 
         private void SetEmpty(int index)
