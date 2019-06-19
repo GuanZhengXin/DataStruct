@@ -17,9 +17,29 @@ namespace DataStruct
             //    bst.Add(number);
             //}
             //bst.LayerTraverse();
-
-            Console.WriteLine('g'-'a');
+            var nums1 = new int[] { 1, 2, 2, 1 };
+            var nums2 = new int[] { 2, 2 };
+            var res = Intersection2(nums1, nums2);
+            foreach (var item in res)
+            {
+                Console.WriteLine(item);
+            }
             Console.ReadKey();
+        }
+
+        public void A()
+        {
+            B();
+        }
+
+        public void B()
+        {
+            C();
+        }
+
+        public void C()
+        {
+            //....
         }
 
         public static bool IsValid(string str)
@@ -86,5 +106,53 @@ namespace DataStruct
                 return this.Age == stu.Age;
             }
         }
+
+        public static int[] Intersection1(int[] nums1, int[] nums2)
+        {
+            var list = new List<int>();
+            var set = new SortedSet<int>();
+            foreach (var num in nums1)
+            {
+                set.Add(num);
+            }
+            foreach (var num in nums2)
+            {
+                if (set.Contains(num))
+                {
+                    list.Add(num);
+                    set.Remove(num);
+                }
+            }
+            return list.ToArray();
+        }
+
+        public static int[] Intersection2(int[] nums1, int[] nums2)
+        {
+            var list = new List<int>();
+            var dic = new Dictionary<int, int>();
+            foreach (var num in nums1)
+            {
+                if (!dic.ContainsKey(num))
+                    dic.Add(num, 1);
+                else
+                    dic[num]++;
+            }
+            foreach (var num in nums2)
+            {
+                if (dic.ContainsKey(num))
+                {
+                    list.Add(num);
+                    dic[num]--;
+                    if (dic[num] == 0)
+                    {
+                        dic.Remove(num);
+                    }
+                }
+
+            }
+            return list.ToArray();
+        }
+
+
     }
 }
