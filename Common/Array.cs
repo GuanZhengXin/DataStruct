@@ -19,6 +19,16 @@ namespace Common
             this.Data = new T[this.Capacity];
         }
 
+        public Array(T[] arr)
+        {
+            Data = new T[arr.Length];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                this.Data[i] = arr[i];
+            }
+            Size = arr.Length;
+        }
+
         public int GetSize()
         {
             return this.Size;
@@ -32,10 +42,31 @@ namespace Common
             this.Data[this.Size - 1] = value;
         }
 
+        public void AddLast(T value)
+        {
+            this.Insert(GetSize(), value);
+        }
+
+        public void Swap(int i, int j)
+        {
+            if(i<0 || i>=GetSize() || j<0 || j>=GetSize())
+                throw new ApplicationException("index is overflow");
+            var temp = Data[i];
+            Data[i] = Data[j];
+            Data[j] = temp;
+        }
+
+        public T Get(int index)
+        {
+            if (index < 0 || index >= GetSize())
+                throw new ApplicationException("index is overflow");
+            return Data[index];
+        }
+
         private void ExpandCapacity(int capacity)
         {
             var newData = new T[capacity];
-            for (int i = 0; i < newData.Length; i++)
+            for (int i = 0; i < this.Data.Length; i++)
             {
                 newData[i] = this.Data[i];
             }
@@ -86,7 +117,7 @@ namespace Common
         private void NarrowCapacity(int capacity)
         {
             var newData = new T[capacity];
-            for (int i = 0; i < this.Data.Length; i++)
+            for (int i = 0; i < newData.Length; i++)
             {
                 newData[i] = this.Data[i];
             }
@@ -123,7 +154,7 @@ namespace Common
             this.Data[index] = value;
         }
 
-        public bool IsContain(int value)
+        public bool IsContain(T value)
         {
             var isContain = false;
             for (int i = 0; i < this.Size; i++)
@@ -159,6 +190,11 @@ namespace Common
                 list.Add(this.Data[i]);
             }
             return $"Use {this.Size}, Capacity {this.Capacity} Numbers is {string.Join(",", list.Select(i => i))}";
+        }
+
+        public bool IsEmpty()
+        {
+            return this.Size == 0;
         }
     }
 }

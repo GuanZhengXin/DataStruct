@@ -10,16 +10,10 @@ namespace DataStruct
     {
         static void Main(string[] args)
         {
-            //var bst = new BinarySearchTree<int>();
-            //var numbers = new int[] { 10,5,2,7,6,4,1,8,15,20,12,11,17,13,22,18,19 };
-            //foreach (var number in numbers)
-            //{
-            //    bst.Add(number);
-            //}
-            //bst.LayerTraverse();
-            var nums1 = new int[] { 1, 2, 2, 1 };
-            var nums2 = new int[] { 2, 2 };
-            var res = Intersection2(nums1, nums2);
+
+            var nums1 = new int[] { -347, -990, 830, -654, -336, -255, -378, -670, 336, 481, 420, 986, 982 ,982,-990,420};
+            var s = new Solution();
+            var res = s.TopKFrequent(nums1, 3);
             foreach (var item in res)
             {
                 Console.WriteLine(item);
@@ -152,7 +146,68 @@ namespace DataStruct
             }
             return list.ToArray();
         }
+    }
 
+    public class Solution
+    {
+        private class Demo : IComparable
+        {
+            public int value;
+            public int Freq;
 
+            public Demo(int value, int freq)
+            {
+                this.value = value;
+                Freq = freq;
+            }
+
+            public int CompareTo(object obj)
+            {
+                var demo = obj as Demo;
+                if (this.Freq < demo.Freq)
+                    return 1;
+                else if (this.Freq > demo.Freq)
+                    return -1;
+                else
+                {
+                    if (this.value > demo.value)
+                        return 1;
+                    else
+                        return 0;
+                }
+                    
+            }
+        }
+
+        public IList<int> TopKFrequent(int[] nums, int k)
+        {
+            var dict = new Dictionary<int, int>();
+            foreach (var num in nums)
+            {
+                if (dict.ContainsKey(num))
+                    dict[num]++;
+                else
+                    dict.Add(num, 1);
+            }
+
+            var pqList = new ProperityQueue<Demo>();
+            foreach (var key in dict.Keys)
+            {
+                if (pqList.GetSize() < k)
+                    pqList.EnQueue(new Demo(key, dict[key]));
+                else if (dict[key] > pqList.Peek().Freq)
+                {
+                    pqList.DeQueue();
+                    pqList.EnQueue(new Demo(key, dict[key]));
+                }
+
+            }
+            var list = new List<int>();
+            while (!pqList.IsEmpty())
+            {
+                list.Add(pqList.DeQueue().value);
+            }
+            return list;
+        }
     }
 }

@@ -21,6 +21,11 @@ namespace Common
 
         private Node DummyHead;
         private int Size;
+        public LinkNodeMap()
+        {
+            DummyHead = new Node();
+        }
+
         public void Add(K key, V value)
         {
             DummyHead.Next = new Node(key, value, DummyHead.Next);
