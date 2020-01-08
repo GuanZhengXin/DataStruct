@@ -18,7 +18,7 @@ namespace Common
             public Node Left { get; set; }
             public Node Right { get; set; }
             public T Value { get; set; }
-            public Node(T value,Node left=null,Node right=null)
+            public Node(T value, Node left = null, Node right = null)
             {
                 this.Value = value;
                 this.Left = left;
@@ -64,7 +64,7 @@ namespace Common
                 return false;
             if (node.Value.CompareTo(value) > 0)
                 return Contains(node.Left, value);
-            else if(node.Value.CompareTo(value)<0)
+            else if (node.Value.CompareTo(value) < 0)
                 return Contains(node.Right, value);
             return true;
         }
@@ -106,7 +106,7 @@ namespace Common
         }
 
         // 后继移除
-        private Node SuccessorRemove(Node node,T value)
+        private Node SuccessorRemove(Node node, T value)
         {
             if (node == null)
                 return null;
@@ -167,7 +167,7 @@ namespace Common
 
         private Node DeleteMax(Node node)
         {
-            if(node.Right == null)
+            if (node.Right == null)
             {
                 var leftNode = node.Left;
                 node.Right = null;
@@ -203,7 +203,7 @@ namespace Common
             if (Root == null)
                 return default;
             var currentNode = Root;
-            while (currentNode.Left!=null)
+            while (currentNode.Left != null)
             {
                 currentNode = currentNode.Left;
             }
@@ -236,11 +236,11 @@ namespace Common
                 if (currentNode.Right != null)
                     queue.EnQueue(currentNode.Right);
             }
-            nums = nums.OrderBy(i=>i).ToList();
-            for (int i = 0; i < nums.Count()+1; i++)
+            nums = nums.OrderBy(i => i).ToList();
+            for (int i = 0; i < nums.Count() + 1; i++)
             {
                 if (nums[i].Equals(value))
-                    return i+1;
+                    return i + 1;
             }
             return -1;
         }

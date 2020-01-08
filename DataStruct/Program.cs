@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Common;
 
 namespace DataStruct
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-
             var nums1 = new int[] { -347, -990, 830, -654, -336, -255, -378, -670, 336, 481, 420, 986, 982 ,982,-990,420};
             var s = new Solution();
             var res = s.TopKFrequent(nums1, 3);
