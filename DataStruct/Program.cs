@@ -4,21 +4,40 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Common.DataStruct;
 
 namespace DataStruct
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            var nums1 = new int[] { -347, -990, 830, -654, -336, -255, -378, -670, 336, 481, 420, 986, 982 ,982,-990,420};
-            var s = new Solution();
-            var res = s.TopKFrequent(nums1, 3);
-            foreach (var item in res)
+            //var linkNode = new LinkNode<int>();
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    linkNode.Add(i, i + 1);
+            //}
+
+            //Console.WriteLine("原来是: " + linkNode.ToString());
+            //linkNode.Reverse();
+            //Console.WriteLine("现在是: " + linkNode.ToString());
+
+
+            var linkNode = new LinkNodeLoop<int>();
+            for (int i = 1; i < 10; i++)
             {
-                Console.WriteLine(item);
+                linkNode.Add(i);
             }
+            Console.WriteLine($"{linkNode}");
+            var b = IsLoopLinkNode(linkNode);
+            Console.WriteLine($"是否是闭关链表:{b}");
             Console.ReadKey();
+        }
+
+        public static bool IsLoopLinkNode<T>(LinkNodeLoop<T> linkNode)
+        {
+            var fastNode = new Point();
+            return true;
         }
 
         public void A()
@@ -43,7 +62,7 @@ namespace DataStruct
             {
                 if (str[i] == '[' || str[i] == '{' || str[i] == '(')
                     stack.Push(str[i]);
-                else if(str[i] == ']' || str[i] == '}' || str[i] == ')')
+                else if (str[i] == ']' || str[i] == '}' || str[i] == ')')
                 {
                     if (stack.Count == 0)
                         return false;
@@ -56,7 +75,7 @@ namespace DataStruct
                         return false;
                 }
             }
-            return stack.Count==0;
+            return stack.Count == 0;
         }
 
         public static int UniqueMorseRepresentations(string[] words)
@@ -175,7 +194,7 @@ namespace DataStruct
                     else
                         return 0;
                 }
-                    
+
             }
         }
 

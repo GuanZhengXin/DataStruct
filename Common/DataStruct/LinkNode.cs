@@ -15,7 +15,7 @@ namespace Common
             public T Value { get; set; }
             public Node Next { get; set; }
 
-            public Node(T value=default, Node next=default)
+            public Node(T value = default, Node next = default)
             {
                 this.Value = value;
                 this.Next = next;
@@ -36,14 +36,16 @@ namespace Common
         private Node DummyHead { get; set; }
         private int Size { get; set; }
 
-        public void Add(int index,T value)
+        public void Add(int index, T value)
         {
             if (index < 0 || index > this.Size)
                 throw new Exception("index is illegal");
+
             var node = new Node(value);
             var prev = DummyHead;
             for (int i = 0; i < index; i++)
                 prev = prev.Next;
+
             node.Next = prev.Next;
             prev.Next = node;
             this.Size++;
@@ -51,7 +53,7 @@ namespace Common
 
         public void AddLast(T value)
         {
-            this.Add(this.Size,value);
+            this.Add(this.Size, value);
         }
 
         public void AddFirst(T value)
@@ -119,12 +121,38 @@ namespace Common
         public void Delete(T value)
         {
             this.DummyHead.Next = DeleteValue(DummyHead.Next, value)
-;        }
+;
+        }
 
-        private Node DeleteValue(Node node,T value)
+        /// <summary>
+        /// 反转链表
+        /// </summary>
+        public void Reverse()
+        {
+            var dict = new Dictionary<int, T>();
+            var count = 0;
+            var currentNode = DummyHead.Next;
+            while (currentNode != null)
+            {
+                count++;
+                dict.Add(count, currentNode.Value);
+                currentNode = currentNode.Next;
+            }
+
+            var newDummyHead = new Node();
+            DummyHead = newDummyHead;
+            Size = 0;
+            for (int i = count; i > 0; i--)
+            {
+                AddLast(dict[i]);
+            }
+        }
+
+        private Node DeleteValue(Node node, T value)
         {
             if (node == null)
                 return null;
+
             node.Next = DeleteValue(node.Next, value);
             return node.Value.Equals(value) ? node.Next : node;
         }
@@ -134,9 +162,9 @@ namespace Common
             return this.Delete(0);
         }
 
-        public T  DeleteLast()
+        public T DeleteLast()
         {
-            return this.Delete(this.Size-1);
+            return this.Delete(this.Size - 1);
         }
 
         public int GetSize()
@@ -146,7 +174,7 @@ namespace Common
 
         public bool IsEmpty()
         {
-            return this.Size==0;
+            return this.Size == 0;
         }
 
         public override string ToString()
