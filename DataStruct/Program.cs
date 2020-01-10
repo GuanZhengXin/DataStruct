@@ -36,7 +36,7 @@ namespace DataStruct
 
         public static bool IsLoopLinkNode<T>(LinkNodeLoop<T> linkNode)
         {
-            var fastNode = new Point();
+            var fastNode = 1;
             return true;
         }
 
