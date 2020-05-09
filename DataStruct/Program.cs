@@ -29,30 +29,8 @@ namespace DataStruct
                 linkNode.Add(i);
             }
             Console.WriteLine($"{linkNode}");
-            var b = IsLoopLinkNode(linkNode);
-            Console.WriteLine($"是否是闭关链表:{b}");
+
             Console.ReadKey();
-        }
-
-        public static bool IsLoopLinkNode<T>(LinkNodeLoop<T> linkNode)
-        {
-            var fastNode = 1;
-            return true;
-        }
-
-        public void A()
-        {
-            B();
-        }
-
-        public void B()
-        {
-            C();
-        }
-
-        public void C()
-        {
-            //....
         }
 
         public static bool IsValid(string str)

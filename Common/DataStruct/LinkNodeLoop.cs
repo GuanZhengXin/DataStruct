@@ -58,6 +58,18 @@ namespace Common.DataStruct
                 node.Next = DummyHead;
                 nextNode.Next = node;
             }
+            Size++;
+        }
+        public T Get(int index)
+        {
+            if (index < 0 || index >= this.Size)
+                throw new Exception("index is illegal");
+            var currentNode = DummyHead.Next;
+            for (int i = 0; i < index; i++)
+            {
+                currentNode = currentNode.Next;
+            }
+            return currentNode.Value;
         }
 
         public override string ToString()
@@ -69,7 +81,8 @@ namespace Common.DataStruct
                 build.Append(currentNode + "->");
                 currentNode = currentNode.Next;
             }
-            build.Append("头");
+            build.Append("Head:0");
+            build.Append("->" + currentNode.Next);
             return build.ToString();
         }
 
