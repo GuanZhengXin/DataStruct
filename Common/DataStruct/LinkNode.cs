@@ -17,8 +17,8 @@ namespace Common
 
             public Node(T value = default, Node next = default)
             {
-                this.Value = value;
-                this.Next = next;
+                Value = value;
+                Next = next;
             }
 
             public override string ToString()
@@ -29,8 +29,8 @@ namespace Common
 
         public LinkNode()
         {
-            this.DummyHead = new Node();
-            this.Size = 0;
+            DummyHead = new Node();
+            Size = 0;
         }
 
         private Node DummyHead { get; set; }
@@ -38,7 +38,7 @@ namespace Common
 
         public void Add(int index, T value)
         {
-            if (index < 0 || index > this.Size)
+            if (index < 0 || index > Size)
                 throw new Exception("index is illegal");
 
             var node = new Node(value);
@@ -48,17 +48,17 @@ namespace Common
 
             node.Next = prev.Next;
             prev.Next = node;
-            this.Size++;
+            Size++;
         }
 
         public void AddLast(T value)
         {
-            this.Add(this.Size, value);
+            Add(Size, value);
         }
 
         public void AddFirst(T value)
         {
-            this.Add(0, value);
+            Add(0, value);
         }
 
         public T Get(int index)
