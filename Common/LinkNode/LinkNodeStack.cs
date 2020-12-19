@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common
+namespace Common.LinkNode
 {
     public class LinkNodeStack<T> : IStack<T>
     {
-        private LinkNode<T> LinkNode;
+        private SingleLinkNode<T> LinkNode;
         public LinkNodeStack()
         {
 
@@ -14,7 +14,7 @@ namespace Common
 
         public void Clear()
         {
-            this.LinkNode = new LinkNode<T>();
+            this.LinkNode = new SingleLinkNode<T>();
         }
 
         public bool IsEmpty()

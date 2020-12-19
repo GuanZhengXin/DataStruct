@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common.DataStruct
+namespace Common.LinkNode
 {
     /// <summary>
     /// 闭环链表

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Common.LinkNode;
 
 namespace Common
 {
@@ -49,10 +50,10 @@ namespace Common
 
     public class LinkNodeSet<T> : ISet<T>
     {
-        private LinkNode<T> Data;
+        private SingleLinkNode<T> Data;
         public LinkNodeSet()
         {
-            this.Data = new LinkNode<T>();
+            this.Data = new SingleLinkNode<T>();
         }
 
         public void Add(T value)

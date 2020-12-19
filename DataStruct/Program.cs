@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using Common;
-using Common.DataStruct;
+using Common.LinkNode;
 
 namespace DataStruct
 {
@@ -23,14 +22,27 @@ namespace DataStruct
             //Console.WriteLine("现在是: " + linkNode.ToString());
 
 
-            var linkNode = new LinkNodeLoop<int>();
+            //var linkNode = new LinkNodeLoop<int>();
+            //for (int i = 1; i < 10; i++)
+            //{
+            //    linkNode.Add(i);
+            //}
+            //Console.WriteLine($"{linkNode}");
+
+            //Console.ReadKey();
+
+            var pairLinkNode = new PairLinkNode<int>();
             for (int i = 1; i < 10; i++)
             {
-                linkNode.Add(i);
+                pairLinkNode.AddLast(i);
             }
-            Console.WriteLine($"{linkNode}");
 
-            Console.ReadKey();
+            Console.WriteLine(pairLinkNode.IsLoop());
+            Console.WriteLine(pairLinkNode);
+
+
+            //LinkNodeExtension.ReverseSingleLinkNode();
+            //LinkNodeExtension.ReversePairLinkNode();
         }
 
         public static bool IsValid(string str)

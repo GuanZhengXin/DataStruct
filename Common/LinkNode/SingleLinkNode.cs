@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common
+namespace Common.LinkNode
 {
     /// <summary>
-    /// 链表
+    /// 单链表
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class LinkNode<T>
+    public class SingleLinkNode<T>
     {
         private class Node
         {
@@ -27,7 +27,7 @@ namespace Common
             }
         }
 
-        public LinkNode()
+        public SingleLinkNode()
         {
             DummyHead = new Node();
             Size = 0;

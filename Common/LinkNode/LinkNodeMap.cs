@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common
+namespace Common.LinkNode
 {
     public class LinkNodeMap<K, V> : IMap<K,V>
     {
