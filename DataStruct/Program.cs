@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Common;
+using Common.Alg;
 using Common.LinkNode;
 
 namespace DataStruct
@@ -31,18 +32,35 @@ namespace DataStruct
 
             //Console.ReadKey();
 
-            var pairLinkNode = new PairLinkNode<int>();
-            for (int i = 1; i < 10; i++)
-            {
-                pairLinkNode.AddLast(i);
-            }
+            //var pairLinkNode = new PairLinkNode<int>();
+            //for (int i = 1; i < 10; i++)
+            //{
+            //    pairLinkNode.AddLast(i);
+            //}
 
-            Console.WriteLine(pairLinkNode.IsLoop());
-            Console.WriteLine(pairLinkNode);
+            //Console.WriteLine(pairLinkNode.IsLoop());
+            //Console.WriteLine(pairLinkNode);
 
 
             //LinkNodeExtension.ReverseSingleLinkNode();
             //LinkNodeExtension.ReversePairLinkNode();
+
+            var nums = new int[] { 3, 5, 1, 9, 6, 7, 8, 2, 4 };
+            nums = SortAlg.QuickSort(nums);
+            foreach (var item in nums)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadKey();
+
+            #region leetcode
+
+            //var res = LeetCodeExtension.TwoSum(new int[] { 1, 4, 6, 8 }, 7);
+            //foreach (var item in res)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
         }
 
         public static bool IsValid(string str)

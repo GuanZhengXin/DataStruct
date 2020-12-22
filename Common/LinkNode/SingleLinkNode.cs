@@ -129,23 +129,16 @@ namespace Common.LinkNode
         /// </summary>
         public void Reverse()
         {
-            var dict = new Dictionary<int, T>();
-            var count = 0;
             var currentNode = DummyHead.Next;
-            while (currentNode != null)
+            Node prev = null;
+            while (currentNode!=null)
             {
-                count++;
-                dict.Add(count, currentNode.Value);
-                currentNode = currentNode.Next;
+                var nextNode = new Node(currentNode.Value, currentNode.Next);
+                currentNode.Next = prev;
+                prev = currentNode;
+                currentNode = nextNode.Next;
             }
-
-            var newDummyHead = new Node();
-            DummyHead = newDummyHead;
-            Size = 0;
-            for (int i = count; i > 0; i--)
-            {
-                AddLast(dict[i]);
-            }
+            DummyHead.Next = prev;
         }
 
         private Node DeleteValue(Node node, T value)

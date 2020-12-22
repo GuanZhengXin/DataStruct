@@ -358,16 +358,13 @@ namespace Common.LinkNode
             if (slowNode == null)
                 return false;
 
-            do
+            while (slowNode != null && fastNode != null && fastNode.Next != null)
             {
                 slowNode = slowNode.Next;
                 fastNode = fastNode.Next.Next;
                 if (slowNode == fastNode)
                     return true;
-
-               
-            } while (slowNode != null && fastNode != null && slowNode.Next != null && fastNode.Next != null && fastNode.Next.Next != null);
-
+            }
             return false;
         }
 
