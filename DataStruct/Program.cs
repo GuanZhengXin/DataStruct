@@ -45,8 +45,8 @@ namespace DataStruct
             //LinkNodeExtension.ReverseSingleLinkNode();
             //LinkNodeExtension.ReversePairLinkNode();
 
-            var nums = new int[] { 3, 5, 1, 9, 6, 7, 8, 2, 4 };
-            nums = SortAlg.QuickSort(nums);
+            var nums = new int[] { 4,8,1,9,7,2,3,6,5};
+            SortAlg.QuickSort(ref nums);
             foreach (var item in nums)
             {
                 Console.WriteLine(item);
