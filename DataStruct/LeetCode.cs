@@ -75,6 +75,54 @@ namespace DataStruct
                     stack.Push(i);
             }
             return stack.Count == 0;
-    }
+        }
+
+        /// <summary>
+        /// 得到第k大元素
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int? GetMaxKElement(int[] nums, int k)
+        {
+            var res = new int[nums.Length];
+            nums.CopyTo(res,0);
+            return QuickSort(ref res, 0, nums.Length-1,k);
+        }
+
+        public static int? QuickSort(ref int[] nums,int p,int r,int k)
+        {
+            if (p >= r)
+                return default;
+
+            var q = PartationSort(ref nums, p, r);
+            if (q == k - 1)
+                return nums[q];
+            else if (q > k - 1)
+                return QuickSort(ref nums, p, q - 1, k);
+            else
+                return QuickSort(ref nums, q + 1, r,k);
+        }
+
+        private static int PartationSort(ref int[] nums,int p, int r)
+        {
+            var pivot = nums[r];
+            var i = p;
+            for (int j = p; j < r; j++)
+            {
+                if (nums[j] < pivot)
+                {
+                    var temp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = temp;
+                    i++;
+                }
+            }
+
+            var temp1 = nums[i];
+            nums[i] = nums[r];
+            nums[r] = temp1;
+            return i;
+        }
+
     }
 }

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Common.Alg
 {
+    /// <summary>
+    /// 排序算法
+    /// </summary>
     public static class SortAlg
     {
         /// <summary>
@@ -108,9 +111,7 @@ namespace Common.Alg
         private static int[] MergeSort(int[] nums, int p, int r)
         {
             if (p >= r)
-            {
                 return new int[] { nums[p] };
-            }
 
             var q = (p + r) / 2;
             var num1 = MergeSort(nums, p, q);
@@ -171,6 +172,7 @@ namespace Common.Alg
         {
             if (p >= r)
                 return;
+
             var q = Partition(ref nums, p, r);
             QuickSort(ref nums, p, q - 1);
             QuickSort(ref nums, q + 1, r);
@@ -195,6 +197,60 @@ namespace Common.Alg
             nums[i] = nums[r];
             nums[r] = temp1;
             return i;
+        }
+
+        /// <summary>
+        /// 桶排序 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int[] BucketSort(int[] nums)
+        {
+            var min = nums.Min();
+            var avg = (nums.Max() - min) / 2;
+            var bucket1 = new int[nums.Length/2];
+            var bucket2 = new int[nums.Length - bucket1.Length];
+            var x = 0;
+            var j = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] <= avg)
+                    bucket1[x++] = nums[i];
+                else
+                    bucket2[j++] = nums[i];
+            }
+
+            QuickSort(ref bucket1);
+            QuickSort(ref bucket2);
+            return MergeArray(bucket1,bucket2);
+        }
+
+        /// <summary>
+        /// 计数排序
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int[] CountingSort(int[] nums)
+        {
+            var min = nums.Min();
+            var resArray = new int[nums.Length];
+            var countArray = new int[nums.Max() - min + 1];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                var index = nums[i] - min;
+                for (int j = countArray.Length - 1; j >= index; j--)
+                {
+                    countArray[j]++;
+                }
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                var index = -- countArray[nums[i] - min];
+                resArray[index] = nums[i];
+            }
+
+            return resArray;
         }
 
     }

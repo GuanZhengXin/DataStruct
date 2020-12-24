@@ -46,12 +46,19 @@ namespace DataStruct
             //LinkNodeExtension.ReversePairLinkNode();
 
             var nums = new int[] { 4,8,1,9,7,2,3,6,5};
-            SortAlg.QuickSort(ref nums);
+            nums = SortAlg.BucketSort(nums);
             foreach (var item in nums)
             {
                 Console.WriteLine(item);
             }
             Console.ReadKey();
+
+
+
+
+
+
+
 
             #region leetcode
 
