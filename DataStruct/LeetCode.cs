@@ -124,5 +124,27 @@ namespace DataStruct
             return i;
         }
 
+        /// <summary>
+        /// 实现“求一个数的平方根”？要求精确到小数点后6位。
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name="presion"></param>
+        /// <returns></returns>
+        public static double Sqrt(double num,int presion=2)
+        {
+            var max = num;
+            var min = 0;
+            var half = (double)num / 2;
+            if (half == num / half)
+                return half;
+            else if (half > num / half)
+            {
+                max = half;
+                return Sqrt(half, presion);
+            }
+            
+            return 0;
+        }
+
     }
 }

@@ -45,17 +45,12 @@ namespace DataStruct
             //LinkNodeExtension.ReverseSingleLinkNode();
             //LinkNodeExtension.ReversePairLinkNode();
 
-            var nums = new int[] { 4,8,1,9,7,2,3,6,5};
-            nums = SortAlg.BucketSort(nums);
-            foreach (var item in nums)
-            {
-                Console.WriteLine(item);
-            }
-            Console.ReadKey();
+            var nums = new int[] { 2,41,67,99,855,855,1034,1456,2456,7777,9999};
+            var index = SortAlg.BinarySearchLastLe(nums,1035);
+            Console.WriteLine($"res:{index}");
 
 
-
-
+            Console.WriteLine(1 & 2);
 
 
 
