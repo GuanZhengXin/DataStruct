@@ -5,6 +5,7 @@ using System.Text;
 using Common;
 using Common.Alg;
 using Common.LinkNode;
+using static DataStruct.LeetCodeExtension;
 
 namespace DataStruct
 {
@@ -45,16 +46,42 @@ namespace DataStruct
             //LinkNodeExtension.ReverseSingleLinkNode();
             //LinkNodeExtension.ReversePairLinkNode();
 
-            var nums = new int[] { 2,41,67,99,855,855,1034,1456,2456,7777,9999};
-            var index = SortAlg.BinarySearchLastLe(nums,1035);
-            Console.WriteLine($"res:{index}");
+            //var nums = new int[] { 2,41,67,99,855,855,1034,1456,2456,7777,9999};
+            //var index = SortAlg.BinarySearchLastLe(nums,1035);
+            //Console.WriteLine($"res:{index}");
 
-
-            Console.WriteLine(1 & 2);
-
-
-
-
+            var l1 = new ListNode()
+            {
+                val = 2,
+                //next = new ListNode()
+                //{
+                //    val = 4,
+                //    next = new ListNode
+                //    {
+                //        val =3 ,
+                //        next = null,
+                //    }
+                //}
+            };
+            var l2 = new ListNode()
+            {
+                val = 5,
+                next = new ListNode()
+                {
+                    val = 6,
+                    next = new ListNode
+                    {
+                        val = 4,
+                        next = null,
+                    }
+                }
+            };
+            var cc = AddTwoNumbers(l1,l2);
+            while (cc!=null)
+            {
+                Console.WriteLine(cc.val);
+                cc = cc.next;
+            }
             #region leetcode
 
             //var res = LeetCodeExtension.TwoSum(new int[] { 1, 4, 6, 8 }, 7);

@@ -125,7 +125,7 @@ namespace DataStruct
         }
 
         /// <summary>
-        /// 实现“求一个数的平方根”？要求精确到小数点后6位。
+        /// 实现“求一个数的平方根”？要求精确到小数点后6位。  
         /// </summary>
         /// <param name=""></param>
         /// <param name="presion"></param>
@@ -144,6 +144,113 @@ namespace DataStruct
             }
             
             return 0;
+        }
+
+        /// <summary>
+        /// 得到窗口最大值 窗口会一直移动
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="windowsSize"></param>
+        /// <returns></returns>
+        public static int[] GetWindosMax(int[] nums, int windowSize = 3)
+        {
+            var res = new int[] { };
+            var window = new int[windowSize];
+            var maxVal = window[0];
+            for (int i = 0; i < windowSize; i++)
+            {
+                if (i != 0)
+                {
+                    if (window[i] > window[i - 1])
+                        maxVal = window[i];
+                    else
+                        maxVal = window[i-1];
+                }
+                    
+                window[i] = nums[i];
+            }
+
+
+            return res;
+        }
+
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int val = 0, ListNode next = null)
+            {
+                this.val = val;
+                this.next = next;
+            }
+        }
+
+        public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+        {
+            ListNode root = new ListNode(0);
+            ListNode cursor = root;
+            int carry = 0;
+            while (l1 != null || l2 != null || carry != 0)
+            {
+                int l1Val = l1 != null ? l1.val : 0;
+                int l2Val = l2 != null ? l2.val : 0;
+                int sumVal = l1Val + l2Val + carry;
+                carry = sumVal / 10;
+
+                ListNode sumNode = new ListNode(sumVal % 10);
+                cursor.next = sumNode;
+                cursor = sumNode;
+
+                if (l1 != null) l1 = l1.next;
+                if (l2 != null) l2 = l2.next;
+            }
+
+            return root.next;
+
+            //var position = 0;
+            //var curretNode1 = l1;
+            //var curretNode2 = l2;
+            //var res = 0;
+            //while (curretNode1 != null && curretNode2 != null)
+            //{
+            //    res += (curretNode1.val + curretNode2.val) * (int)Math.Pow(10, position);
+            //    curretNode1 = curretNode1.next;
+            //    curretNode2 = curretNode2.next;
+            //    position++;
+            //}
+
+            //if (curretNode1 == null)
+            //{
+            //    while (curretNode2!=null)
+            //    {
+            //        res += curretNode2.val * (int)Math.Pow(10, position);
+            //        curretNode2 = curretNode2.next;
+            //        position++;
+            //    }
+            //}else if(curretNode2 == null)
+            //{
+            //    while (curretNode1 != null)
+            //    {
+            //        res += curretNode1.val * (int)Math.Pow(10, position);
+            //        curretNode1 = curretNode1.next;
+            //        position++;
+            //    }
+            //}
+
+            //var startNode = new ListNode(0);
+            //var currentNode = startNode;
+            //var post = res.ToString().Length;
+            //for (int i = 0; i < post; i++)
+            //{
+            //    var node = new ListNode
+            //    {
+            //        val = (res / ((int)Math.Pow(10, i))) % 10
+            //    };
+            //    currentNode.next = node;
+            //    currentNode = node;
+            //}
+
+            //return startNode.next;
         }
 
     }

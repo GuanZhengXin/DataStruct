@@ -102,6 +102,24 @@ namespace Common.LinkNode
         }
 
         /// <summary>
+        /// 更新数据
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="val"></param>
+        public void Update(int index,T val)
+        {
+            if (index > Length - 1)
+                throw new ArgumentException("index is outbounds");
+
+            var currentNode = SentryHead.Next;
+            for (int i = 0; i < index; i++)
+            {
+                currentNode = currentNode.Next;
+            }
+            currentNode.Value = val;
+        }
+
+        /// <summary>
         /// 增加一个节点到第一个位置
         /// </summary>
         /// <param name="value">node element</param>
