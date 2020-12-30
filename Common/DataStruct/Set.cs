@@ -16,10 +16,10 @@ namespace Common
 
     public class BinaryTreeSet<T> : ISet<T> where T: IComparable
     {
-        private BinarySearchTree<T> Data;
+        private BinarySearchTree1<T> Data;
         public BinaryTreeSet()
         {
-            this.Data = new BinarySearchTree<T>();
+            this.Data = new BinarySearchTree1<T>();
         }
 
         public void Add(T value)

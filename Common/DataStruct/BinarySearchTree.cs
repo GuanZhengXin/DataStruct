@@ -9,7 +9,7 @@ namespace Common
     /// 二分搜索树
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinarySearchTree<T> where T : IComparable
+    public class BinarySearchTree1<T> where T : IComparable
     {
         public Node Root { get; set; }
         private int Size;
@@ -36,9 +36,14 @@ namespace Common
             return this.Size == 0;
         }
 
+        /// <summary>
+        /// 添加节点
+        /// </summary>
+        /// <param name="value"></param>
         public void Add(T value)
         {
             Root = AddNode(Root, value);
+            Size++;
         }
 
         private Node AddNode(Node node, T value)
@@ -53,6 +58,11 @@ namespace Common
             return node;
         }
 
+        /// <summary>
+        /// 是否包含某个节点
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool IsContains(T value)
         {
             return Contains(Root, value);
@@ -69,7 +79,9 @@ namespace Common
             return true;
         }
 
-        //深度优先遍历
+        /// <summary>
+        /// 深度优先遍历
+        /// </summary>
         public void PreTraverse()
         {
             PreTraverse(Root);
@@ -84,7 +96,9 @@ namespace Common
             PreTraverse(node.Right);
         }
 
-        // 广度优先遍历
+        /// <summary>
+        /// 广度优先遍历
+        /// </summary>
         public void LayerTraverse()
         {
             var queue = new Queue<Node>();
@@ -100,6 +114,10 @@ namespace Common
             }
         }
 
+        /// <summary>
+        /// 删除元素
+        /// </summary>
+        /// <param name="value"></param>
         public void Delete(T value)
         {
             Root = SuccessorRemove(Root, value);
@@ -158,11 +176,32 @@ namespace Common
             return currentNode;
         }
 
+        /// <summary>
+        /// 删除最大值
+        /// </summary>
+        /// <returns></returns>
         public T DeleteMax()
         {
             var res = FindMax();
             Root = DeleteMax(Root);
             return res;
+        }
+
+        /// <summary>
+        /// 找到最大值
+        /// </summary>
+        /// <returns></returns>
+        public T FindMax()
+        {
+            if (Root == null)
+                return default;
+
+            var currentNode = Root;
+            while (currentNode.Right != null)
+            {
+                currentNode = currentNode.Right;
+            }
+            return currentNode.Value;
         }
 
         private Node DeleteMax(Node node)
@@ -178,6 +217,10 @@ namespace Common
             return node;
         }
 
+        /// <summary>
+        /// 删除最小值
+        /// </summary>
+        /// <returns></returns>
         public T DeleteMin()
         {
             var res = FindMin();
@@ -198,6 +241,10 @@ namespace Common
             return node;
         }
 
+        /// <summary>
+        /// 找到最小值
+        /// </summary>
+        /// <returns></returns>
         public T FindMin()
         {
             if (Root == null)
@@ -210,18 +257,11 @@ namespace Common
             return currentNode.Value;
         }
 
-        public T FindMax()
-        {
-            if (Root == null)
-                return default;
-            var currentNode = Root;
-            while (currentNode.Right != null)
-            {
-                currentNode = currentNode.Left;
-            }
-            return currentNode.Value;
-        }
-
+        /// <summary>
+        /// 得到值节点的排名
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public int GetRank(T value)
         {
             var nums = new List<T>();

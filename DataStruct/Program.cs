@@ -5,6 +5,7 @@ using System.Text;
 using Common;
 using Common.Alg;
 using Common.LinkNode;
+using Common.Tree;
 using static DataStruct.LeetCodeExtension;
 
 namespace DataStruct
@@ -50,38 +51,19 @@ namespace DataStruct
             //var index = SortAlg.BinarySearchLastLe(nums,1035);
             //Console.WriteLine($"res:{index}");
 
-            var l1 = new ListNode()
+            var binaryTree = new BinarySearchTree<int>();
+            var nums = new int[] { 56,66,12,44,23, 99,77, 87,71,50,32,9,1,35};
+            for (int i = 0; i < nums.Length; i++)
             {
-                val = 2,
-                //next = new ListNode()
-                //{
-                //    val = 4,
-                //    next = new ListNode
-                //    {
-                //        val =3 ,
-                //        next = null,
-                //    }
-                //}
-            };
-            var l2 = new ListNode()
-            {
-                val = 5,
-                next = new ListNode()
-                {
-                    val = 6,
-                    next = new ListNode
-                    {
-                        val = 4,
-                        next = null,
-                    }
-                }
-            };
-            var cc = AddTwoNumbers(l1,l2);
-            while (cc!=null)
-            {
-                Console.WriteLine(cc.val);
-                cc = cc.next;
+                binaryTree.Add(nums[i]);
             }
+
+            binaryTree.PreOrder();
+            Console.WriteLine("-----");
+            binaryTree.InOrder();
+            Console.WriteLine("-----");
+            binaryTree.PostOrder();
+            Console.WriteLine("-----");
             #region leetcode
 
             //var res = LeetCodeExtension.TwoSum(new int[] { 1, 4, 6, 8 }, 7);
