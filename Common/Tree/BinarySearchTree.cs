@@ -91,15 +91,23 @@ namespace Common.Tree
             if (Root == null)
                 return default;
 
-            return FindMax(Root);
+            return FindMaxValue(Root);
         }
 
-        private T FindMax(TreeNode node)
+        private T FindMaxValue(TreeNode node)
         {
             if (node.Right == null)
                 return node.Value;
 
-            return FindMax(node.Right);
+            return FindMaxValue(node.Right);
+        }
+
+        private TreeNode FindMaxNode(TreeNode node)
+        {
+            if (node.Right == null)
+                return node;
+
+            return FindMaxNode(node.Right);
         }
 
         /// <summary>
@@ -111,15 +119,23 @@ namespace Common.Tree
             if (Root == null)
                 return default;
 
-            return FindMin(Root);
+            return FindMinValue(Root);
         }
 
-        private T FindMin(TreeNode node)
+        private T FindMinValue(TreeNode node)
         {
             if (node.Left == null)
                 return node.Value;
 
-            return FindMin(node.Left);
+            return FindMinValue(node.Left);
+        }
+
+        private TreeNode FindMinNode(TreeNode node)
+        {
+            if (node.Left == null)
+                return node;
+
+            return FindMinNode(node.Left);
         }
 
         /// <summary>
@@ -169,11 +185,6 @@ namespace Common.Tree
             }
             node.Left = DeleteMin(node.Left);
             return node;
-        }
-
-        public void Delete(T value)
-        {
-            var node = Find(value);
         }
 
         /// <summary>
@@ -261,6 +272,55 @@ namespace Common.Tree
         public T FindRank(int sort)
         {
             return default;
+        }
+
+        /// <summary>
+        /// 删除元素
+        /// </summary>
+        /// <param name="value"></param>
+        public void Delete(T value)
+        {
+            Root = SuccessorRemove(Root,value);
+        }
+
+        public TreeNode SuccessorRemove(TreeNode node, T value)
+        {
+            if (node == null)
+                return default;
+
+            if (node.Value.CompareTo(value) > 0)
+            {
+                node.Left  = SuccessorRemove(node.Left, value);
+                return node;
+            }else if (node.Value.CompareTo(value) < 0)
+            {
+                node.Right = SuccessorRemove(node.Right, value);
+                return node;
+            }
+            else {
+                if (node.Left == null)
+                {
+                    var rightNode = node.Right;
+                    node.Right = null;
+                    Size--;
+                    return rightNode;
+                }
+
+                if (node.Right == null)
+                {
+                    var leftNode = node.Left;
+                    node.Left = null;
+                    Size--;
+                    return leftNode;
+                }
+
+                var successor = FindMinNode(node.Right);
+                successor.Right = DeleteMin(node.Right);
+                successor.Left = node.Left;
+                node.Left = node.Right = null;
+                Size--;
+                return successor;
+            }
         }
 
     }
