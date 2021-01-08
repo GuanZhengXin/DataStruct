@@ -253,5 +253,37 @@ namespace DataStruct
             //return startNode.next;
         }
 
+
+        /// <summary>
+        /// 排列组合
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="n"></param>
+        /// <param name="k"></param>
+        public static void PrintPermutations(int[] data, int k)
+        {
+            if (k == 1)
+            {
+                for (int i = 0; i < data.Length; ++i)
+                {
+                    Console.WriteLine(data[i] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            for (int i = 0; i < k; ++i)
+            {
+                int tmp = data[i];
+                data[i] = data[k - 1];
+                data[k - 1] = tmp;
+
+                PrintPermutations(data, k - 1);
+
+                tmp = data[i];
+                data[i] = data[k - 1];
+                data[k - 1] = tmp;
+            }
+        }
+
     }
 }

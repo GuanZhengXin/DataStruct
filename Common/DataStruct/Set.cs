@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Common.LinkNode;
+using Common.Tree;
 
 namespace Common
 {
@@ -16,10 +17,10 @@ namespace Common
 
     public class BinaryTreeSet<T> : ISet<T> where T: IComparable
     {
-        private BinarySearchTree1<T> Data;
+        private BinarySearchTree<T> Data;
         public BinaryTreeSet()
         {
-            this.Data = new BinarySearchTree1<T>();
+            this.Data = new BinarySearchTree<T>();
         }
 
         public void Add(T value)

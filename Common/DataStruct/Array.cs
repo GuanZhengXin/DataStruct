@@ -47,10 +47,16 @@ namespace Common
             this.Insert(GetSize(), value);
         }
 
+        /// <summary>
+        /// 交换数据
+        /// </summary>
+        /// <param name="i">索引i</param>
+        /// <param name="j">索引j</param>
         public void Swap(int i, int j)
         {
             if(i<0 || i>=GetSize() || j<0 || j>=GetSize())
                 throw new ApplicationException("index is overflow");
+
             var temp = Data[i];
             Data[i] = Data[j];
             Data[j] = temp;
@@ -60,6 +66,7 @@ namespace Common
         {
             if (index < 0 || index >= GetSize())
                 throw new ApplicationException("index is overflow");
+
             return Data[index];
         }
 
@@ -78,8 +85,10 @@ namespace Common
         {
             if (index < 0)
                 throw new Exception("index is less than zero");
+
             if (index > this.Capacity-1 || index > this.Size)
                 throw new Exception("index is more than capacity or Size");
+
             for (int i = Size-1; i >index-1; i--)
             {
                 this.Data[i + 1] = this.Data[i];
@@ -98,10 +107,13 @@ namespace Common
         {
             if (index < 0)
                 throw new Exception("index is less than zero");
+
             if (index > this.Capacity-1)
                 throw new Exception("index is more than capacity");
+
             if (index > this.Size-1)
                 return default;
+
             var value = this.Data[index];
             for (int i = index; i < this.Size-1; i++)
             {
@@ -147,10 +159,13 @@ namespace Common
         {
             if (index < 0)
                 throw new Exception("index is less than zero");
+
             if (index > this.Capacity - 1)
                 throw new Exception("index is more than capacity");
+
             if (index > this.Size - 1)
                 return;
+
             this.Data[index] = value;
         }
 

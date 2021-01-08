@@ -6,12 +6,12 @@ namespace Common
 {
     public class ProperityQueue<T> : IQueue<T> where T :IComparable
     {
-        private Heap<T> Data;
+        private MaxHeap<T> Data;
         private int Size => this.GetSize();
 
         public ProperityQueue()
         {
-            this.Data = new Heap<T>();
+            this.Data = new MaxHeap<T>();
         }
 
         public T DeQueue()

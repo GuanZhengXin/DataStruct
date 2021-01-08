@@ -51,19 +51,25 @@ namespace DataStruct
             //var index = SortAlg.BinarySearchLastLe(nums,1035);
             //Console.WriteLine($"res:{index}");
 
-            var binaryTree = new BinarySearchTree<int>();
-            var nums = new int[] { 56,66,12,44,23, 99,77, 87,71,50,32,9,1,35};
+            //var binaryTree = new RedBlackTree<int>();
+            //var nums = new int[] { 56,66,12,44}; //23, 99,77, 87,71,50,32,9,1,35
+            //for (int i = 0; i < nums.Length; i++)
+            //{
+            //    binaryTree.Add(nums[i]);
+            //}
+            //binaryTree.PreOrder();
+            //Console.WriteLine("-----");
+
+            var heap = new MinHeap<int>();
+            var nums = new int[] { 56, 66, 12, 44, 23, 99, 77, 87, 71, 50, 32, 9, 1, 35 }; 
             for (int i = 0; i < nums.Length; i++)
             {
-                binaryTree.Add(nums[i]);
+                heap.Add(nums[i]);
             }
-
-            binaryTree.PreOrder();
-            Console.WriteLine("-----");
-            binaryTree.InOrder();
-            Console.WriteLine("-----");
-            binaryTree.PostOrder();
-            Console.WriteLine("-----");
+            Console.WriteLine(heap.ToString());
+            heap.DeleteHeapTop();
+            Console.WriteLine(heap.ToString());
+            Console.WriteLine("------");
             #region leetcode
 
             //var res = LeetCodeExtension.TwoSum(new int[] { 1, 4, 6, 8 }, 7);
@@ -71,6 +77,8 @@ namespace DataStruct
             //{
             //    Console.WriteLine(item);
             //}
+            //int[] a  = { 1, 2, 3};
+            //LeetCodeExtension.PrintPermutations(a,3);
             #endregion
         }
 

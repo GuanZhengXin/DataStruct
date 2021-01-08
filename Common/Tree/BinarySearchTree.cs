@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Common.Tree
 {
+    /// <summary>
+    /// 二分搜索树
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BinarySearchTree<T>  where T: IComparable
     {
         private TreeNode Root { get; set; }
@@ -26,6 +32,24 @@ namespace Common.Tree
             public TreeNode Right { get; set; }
 
             public T Value { get; set; }
+        }
+
+        /// <summary>
+        /// 得到总数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetSize()
+        {
+            return Size;
+        }
+
+        /// <summary>
+        /// 树是否为空
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEmpty()
+        {
+            return Size == 0;
         }
 
         /// <summary>
@@ -242,6 +266,24 @@ namespace Common.Tree
         }
 
         /// <summary>
+        /// 广度遍历 层序遍历
+        /// </summary>
+        public void LayerTraverse()
+        {
+            var queue = new Queue<TreeNode>();
+            queue.EnQueue(Root);
+            while (!queue.IsEmpty())
+            {
+                var currentNode = queue.DeQueue();
+                Console.WriteLine(currentNode.Value);
+                if (currentNode.Left != null)
+                    queue.EnQueue(currentNode.Left);
+                if (currentNode.Right != null)
+                    queue.EnQueue(currentNode.Right);
+            }
+        }
+
+        /// <summary>
         /// 是否包含某个值
         /// </summary>
         /// <param name="value"></param>
@@ -265,13 +307,31 @@ namespace Common.Tree
         }
 
         /// <summary>
-        /// 查找第第几个元素
+        /// 查找值的排名
         /// </summary>
         /// <param name="sort"></param>
         /// <returns></returns>
-        public T FindRank(int sort)
+        public int FindRank(T value)
         {
-            return default;
+            var nums = new List<T>();
+            var queue = new Queue<TreeNode>();
+            queue.EnQueue(Root);
+            while (!queue.IsEmpty())
+            {
+                var currentNode = queue.DeQueue();
+                nums.Add(currentNode.Value);
+                if (currentNode.Left != null)
+                    queue.EnQueue(currentNode.Left);
+                if (currentNode.Right != null)
+                    queue.EnQueue(currentNode.Right);
+            }
+            nums = nums.OrderBy(i => i).ToList();
+            for (int i = 0; i < nums.Count() + 1; i++)
+            {
+                if (nums[i].Equals(value))
+                    return i + 1;
+            }
+            return -1;
         }
 
         /// <summary>
