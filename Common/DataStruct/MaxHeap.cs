@@ -7,12 +7,12 @@ namespace Common
     /// <summary>
     /// 大顶堆
     /// </summary>
-    public class MaxHeap<T> where T :IComparable
+    public class MaxHeap<T> where T : IComparable
     {
         private Array<T> Data;
         private int Size => this.GetSize();
 
-        public MaxHeap(int capacity=20)
+        public MaxHeap(int capacity = 20)
         {
             this.Data = new Array<T>();
         }
@@ -20,9 +20,9 @@ namespace Common
         public MaxHeap(T[] arr)
         {
             Data = new Array<T>(arr);
-            for (int i = GetParent(arr.Length-1); i >=0 ; i--)
+            for (int i = GetParent(arr.Length - 1); i >= 0; i--)
             {
-                SiftDown(i);
+                ShiftDown(i);
             }
         }
 
@@ -38,7 +38,7 @@ namespace Common
         public void Add(T value)
         {
             Data.AddLast(value);
-            SiftUp(Data.GetSize()-1);
+            SiftUp(Data.GetSize() - 1);
         }
 
         /// <summary>
@@ -63,22 +63,24 @@ namespace Common
             var res = Data.Get(0);
             Data.Swap(0, Data.GetSize() - 1);
             Data.Delete(Data.GetSize() - 1);
-            SiftDown(0);
+            ShiftDown(0);
             return res;
         }
 
-        private void SiftDown(int index)
+        private void ShiftDown(int index, int? maxIndex = default)
         {
-            while ( GetLeft(index) < Data.GetSize())
+            maxIndex = maxIndex ?? GetSize();
+            while (GetLeft(index) < maxIndex)
             {
                 int nodeIndex = GetLeft(index);
-                if (nodeIndex + 1 < Data.GetSize() && Data.Get(nodeIndex + 1).CompareTo(Data.Get(nodeIndex)) > 0)
+                if (nodeIndex + 1 < maxIndex && Data.Get(nodeIndex + 1).CompareTo(Data.Get(nodeIndex)) > 0)
                     nodeIndex = GetRight(index);
 
                 if (Data.Get(index).CompareTo(Data.Get(nodeIndex)) >= 0)
                     break;
 
                 Data.Swap(index, nodeIndex);
+                index = nodeIndex;
             }
         }
 
@@ -141,6 +143,29 @@ namespace Common
         public int GetSize()
         {
             return this.Data.GetSize();
+        }
+
+        /// <summary>
+        /// 堆排序
+        /// </summary>
+        /// <returns></returns>
+        public Array<T> Sort()
+        {
+            var size = GetSize();
+            while (size > 1)
+            {
+                Data.Swap(0, size - 1);
+                ShiftDown(0, size - 1);
+                var sb = new StringBuilder();
+                for (int x = 0; x < Data.GetSize(); x++)
+                {
+                    sb.Append($"{Data.Get(x)},");
+                }
+                Console.WriteLine($"索引:{size - 1}" + " " + sb.ToString());
+                size--;
+            }
+
+            return Data;
         }
 
         public override string ToString()

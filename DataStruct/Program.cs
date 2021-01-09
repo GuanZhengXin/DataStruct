@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using Common;
 using Common.Alg;
@@ -60,16 +61,24 @@ namespace DataStruct
             //binaryTree.PreOrder();
             //Console.WriteLine("-----");
 
-            var heap = new MinHeap<int>();
-            var nums = new int[] { 56, 66, 12, 44, 23, 99, 77, 87, 71, 50, 32, 9, 1, 35 }; 
-            for (int i = 0; i < nums.Length; i++)
+            //var heap = new MinHeap<int>();
+            //var nums = new int[] { 56, 66, 12, 44, 23, 99, 77, 87, 71, 50, 32, 9, 1, 35 }; 
+            //for (int i = 0; i < nums.Length; i++)
+            //{
+            //    heap.Add(nums[i]);
+            //}
+            //Console.WriteLine(heap.ToString());
+            //heap.DeleteHeapTop();
+            //Console.WriteLine(heap.ToString());
+            //Console.WriteLine("------");
+
+            var nums = new int[] { 56, 66, 12, 44, 23, 99, 77, 87, 71, 50, 32, 9, 1, 35 };
+            var ccs = SortAlg.HeapSort(nums, sort: 1);
+            for (int i = 0; i < ccs.Length; i++)
             {
-                heap.Add(nums[i]);
+                Console.WriteLine(ccs[i]);
             }
-            Console.WriteLine(heap.ToString());
-            heap.DeleteHeapTop();
-            Console.WriteLine(heap.ToString());
-            Console.WriteLine("------");
+
             #region leetcode
 
             //var res = LeetCodeExtension.TwoSum(new int[] { 1, 4, 6, 8 }, 7);

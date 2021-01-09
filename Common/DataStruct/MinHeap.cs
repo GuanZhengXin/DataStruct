@@ -7,12 +7,26 @@ namespace Common
     /// 小顶堆
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MinHeap<T> where T: IComparable
+    public class MinHeap<T> where T : IComparable
     {
         private Array<T> Data { get; set; }
-        public MinHeap(int capacity=20)
+
+        public MinHeap(int capacity = 20)
         {
             Data = new Array<T>(capacity);
+        }
+
+        /// <summary>
+        /// 建堆   完全二叉树叶子节点为 (n/2)+1 ---> n
+        /// </summary>
+        /// <param name="arr"></param>
+        public MinHeap(T[] arr)
+        {
+            Data = new Array<T>(arr);
+            for (int i = GetParent(arr.Length - 1); i >= 0; i--)
+            {
+                ShiftDown(i);
+            }
         }
 
         /// <summary>
@@ -49,7 +63,7 @@ namespace Common
         /// </summary>
         public void DeleteHeapTop()
         {
-            Data.Swap(0,GetSize() - 1);
+            Data.Swap(0, GetSize() - 1);
             Data.Delete(GetSize() - 1);
             ShiftDown(0);
         }
@@ -58,18 +72,20 @@ namespace Common
         /// 向下漂移比较
         /// </summary>
         /// <param name="index"></param>
-        private void ShiftDown(int index)
+        private void ShiftDown(int index, int? maxIndex = default)
         {
-            while (GetLeft(index) < GetSize())
+            maxIndex = maxIndex ?? GetSize();
+            while (GetLeft(index) < maxIndex)
             {
                 var currrentIndex = GetLeft(index);
-                if (currrentIndex + 1 < GetSize() && Get(currrentIndex).CompareTo(currrentIndex + 1) > 0)
+                if (currrentIndex + 1 < maxIndex && Get(currrentIndex).CompareTo(Get(currrentIndex + 1)) > 0)
                     currrentIndex += 1;
 
                 if (Get(currrentIndex).CompareTo(Get(index)) >= 0)
                     break;
 
                 Data.Swap(currrentIndex, index);
+                index = currrentIndex;
             }
         }
 
@@ -96,7 +112,7 @@ namespace Common
             if (index <= 0)
                 return -1;
 
-            return (index -1) / 2;
+            return (index - 1) / 2;
         }
 
         /// <summary>
@@ -127,6 +143,23 @@ namespace Common
                 sb.Append($"{Data.Get(i)},");
             }
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// 堆排序
+        /// </summary>
+        /// <returns></returns>
+        public Array<T> Sort()
+        {
+            var size = GetSize();
+            while (size > 1)
+            {
+                Data.Swap(0, size - 1);
+                ShiftDown(0, size - 1);
+                size--;
+            }
+
+            return Data;
         }
 
     }

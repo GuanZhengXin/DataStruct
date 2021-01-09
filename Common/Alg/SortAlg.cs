@@ -404,5 +404,34 @@ namespace Common.Alg
 
             return default;
         }
+
+        /// <summary>
+        ///  堆排序 默认升序
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="sort">0升序 1降序</param>
+        /// <returns></returns>
+        public static int[] HeapSort(int[] nums,int sort = 0)
+        {
+            Array<int> values;
+            if (sort == 0)
+            {
+                var heap = new MaxHeap<int>(nums);
+                values = heap.Sort();
+            }
+            else
+            {
+                var heap = new MinHeap<int>(nums);
+                values = heap.Sort();
+            }
+
+            var size = values.GetSize();
+            nums = new int[size];
+            for (int i = 0; i < size; i++)
+            {
+                nums[i] = values.Get(i);
+            }
+            return nums;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -123,6 +124,7 @@ namespace Common
             this.Size--;
             if (this.Size <= this.Capacity/4)
                this.NarrowCapacity(this.Capacity / 2);
+
             return value;
         }
 

@@ -8,14 +8,14 @@ namespace Common.Tree
     /// 二分搜索树
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinarySearchTree<T>  where T: IComparable
+    public class BinarySearchTree<T> where T : IComparable
     {
         private TreeNode Root { get; set; }
         public int Size { get; set; }
 
         public class TreeNode
         {
-            public TreeNode(T value,TreeNode left = null, TreeNode right = null)
+            public TreeNode(T value, TreeNode left = null, TreeNode right = null)
             {
                 Left = left;
                 Right = right;
@@ -24,7 +24,7 @@ namespace Common.Tree
 
             public TreeNode()
             {
-                
+
             }
 
             public TreeNode Left { get; set; }
@@ -68,7 +68,7 @@ namespace Common.Tree
         /// <param name="node"><父亲节点/param>
         /// <param name="value">元素值</param>
         /// <returns></returns>
-        private TreeNode AddNode(TreeNode node,T value)
+        private TreeNode AddNode(TreeNode node, T value)
         {
             if (node == null)
                 return new TreeNode(value);
@@ -94,7 +94,7 @@ namespace Common.Tree
                 {
                     currentNode = currentNode.Left;
                 }
-                else if(currentNode.Value.CompareTo(value) < 0)
+                else if (currentNode.Value.CompareTo(value) < 0)
                 {
                     currentNode = currentNode.Right;
                 }
@@ -340,7 +340,7 @@ namespace Common.Tree
         /// <param name="value"></param>
         public void Delete(T value)
         {
-            Root = SuccessorRemove(Root,value);
+            Root = SuccessorRemove(Root, value);
         }
 
         public TreeNode SuccessorRemove(TreeNode node, T value)
@@ -350,14 +350,16 @@ namespace Common.Tree
 
             if (node.Value.CompareTo(value) > 0)
             {
-                node.Left  = SuccessorRemove(node.Left, value);
+                node.Left = SuccessorRemove(node.Left, value);
                 return node;
-            }else if (node.Value.CompareTo(value) < 0)
+            }
+            else if (node.Value.CompareTo(value) < 0)
             {
                 node.Right = SuccessorRemove(node.Right, value);
                 return node;
             }
-            else {
+            else
+            {
                 if (node.Left == null)
                 {
                     var rightNode = node.Right;
