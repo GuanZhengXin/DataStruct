@@ -68,13 +68,18 @@ namespace Common
             ShiftDown(0);
         }
 
+        public T GetHeapTop()
+        {
+            return Data.Get(0);
+        }
+
         /// <summary>
         /// 向下漂移比较
         /// </summary>
         /// <param name="index"></param>
         private void ShiftDown(int index, int? maxIndex = default)
         {
-            maxIndex = maxIndex ?? GetSize();
+            maxIndex ??= GetSize();
             while (GetLeft(index) < maxIndex)
             {
                 var currrentIndex = GetLeft(index);

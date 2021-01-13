@@ -14,7 +14,7 @@ namespace Common
 
         public MaxHeap(int capacity = 20)
         {
-            this.Data = new Array<T>();
+            this.Data = new Array<T>(capacity);
         }
 
         public MaxHeap(T[] arr)

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using Common;
-using Common.Alg;
-using Common.LinkNode;
 using Common.Tree;
-using static DataStruct.LeetCodeExtension;
 
 namespace DataStruct
 {
@@ -15,70 +11,15 @@ namespace DataStruct
     {
         static void Main(string[] args)
         {
-            //var linkNode = new LinkNode<int>();
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    linkNode.Add(i, i + 1);
-            //}
+            //var nums = new int[] { 1, 4, 6, 8 };
+            //var tree = new SegmentTree<int>(nums, new IntMerger());
+            //Console.WriteLine(tree.ToString());
 
-            //Console.WriteLine("原来是: " + linkNode.ToString());
-            //linkNode.Reverse();
-            //Console.WriteLine("现在是: " + linkNode.ToString());
-
-
-            //var linkNode = new LinkNodeLoop<int>();
-            //for (int i = 1; i < 10; i++)
-            //{
-            //    linkNode.Add(i);
-            //}
-            //Console.WriteLine($"{linkNode}");
-
-            //Console.ReadKey();
-
-            //var pairLinkNode = new PairLinkNode<int>();
-            //for (int i = 1; i < 10; i++)
-            //{
-            //    pairLinkNode.AddLast(i);
-            //}
-
-            //Console.WriteLine(pairLinkNode.IsLoop());
-            //Console.WriteLine(pairLinkNode);
-
-
-            //LinkNodeExtension.ReverseSingleLinkNode();
-            //LinkNodeExtension.ReversePairLinkNode();
-
-            //var nums = new int[] { 2,41,67,99,855,855,1034,1456,2456,7777,9999};
-            //var index = SortAlg.BinarySearchLastLe(nums,1035);
-            //Console.WriteLine($"res:{index}");
-
-            //var binaryTree = new RedBlackTree<int>();
-            //var nums = new int[] { 56,66,12,44}; //23, 99,77, 87,71,50,32,9,1,35
-            //for (int i = 0; i < nums.Length; i++)
-            //{
-            //    binaryTree.Add(nums[i]);
-            //}
-            //binaryTree.PreOrder();
-            //Console.WriteLine("-----");
-
-            //var heap = new MinHeap<int>();
-            //var nums = new int[] { 56, 66, 12, 44, 23, 99, 77, 87, 71, 50, 32, 9, 1, 35 }; 
-            //for (int i = 0; i < nums.Length; i++)
-            //{
-            //    heap.Add(nums[i]);
-            //}
-            //Console.WriteLine(heap.ToString());
-            //heap.DeleteHeapTop();
-            //Console.WriteLine(heap.ToString());
-            //Console.WriteLine("------");
-
-            var nums = new int[] { 56, 66, 12, 44, 23, 99, 77, 87, 71, 50, 32, 9, 1, 35 };
-            var ccs = SortAlg.HeapSort(nums, sort: 1);
-            for (int i = 0; i < ccs.Length; i++)
-            {
-                Console.WriteLine(ccs[i]);
-            }
-
+            var trie = new Trie();
+            trie.Add("add");
+            trie.Add("apple");
+            trie.Add("balance");
+            Console.WriteLine(trie);
             #region leetcode
 
             //var res = LeetCodeExtension.TwoSum(new int[] { 1, 4, 6, 8 }, 7);
@@ -89,6 +30,15 @@ namespace DataStruct
             //int[] a  = { 1, 2, 3};
             //LeetCodeExtension.PrintPermutations(a,3);
             #endregion
+        }
+
+
+        public class IntMerger : IMerger<int>
+        {
+            public int Merge(int t1, int t2)
+            {
+                return t1 + t2;
+            }
         }
 
         public static bool IsValid(string str)
@@ -130,8 +80,26 @@ namespace DataStruct
             return set.Count;
         }
 
+        public class StudentMerger : IMerger<Student>
+        {
+            public Student Merge(Student t1, Student t2)
+            {
+                var stu = new Student()
+                {
+                    Name = t1.Name == t2.Name ? "same" : "diff",
+                    Age = t1.Age > t2.Age ? t1.Age : t2.Age,
+                };
+                stu.Score = stu.Name == "same" ? 5 + t1.Score : -3 + t1.Score;
+                return stu;
+            }
+        }
+
         public class Student : IComparable
         {
+            public Student()
+            {
+            }
+
             public Student(string name, int age, char gender)
             {
                 Name = name;
@@ -142,6 +110,7 @@ namespace DataStruct
             public string Name { get; set; }
             public int Age { get; set; }
             public char Gender { get; set; }
+            public int Score { get; set; }
 
             public int CompareTo(object obj)
             {
@@ -153,6 +122,11 @@ namespace DataStruct
             {
                 var stu = obj as Student;
                 return this.Age == stu.Age;
+            }
+
+            public override string ToString()
+            {
+                return $"name:{Name},age:{Age},Socre:{Score}";
             }
         }
 
