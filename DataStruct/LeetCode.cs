@@ -25,7 +25,7 @@ namespace DataStruct
 
                 dict.Add(target - nums[i],i);
             }
-            return new int[] { }; 
+            return new int[] { };
         }
 
         /// <summary>

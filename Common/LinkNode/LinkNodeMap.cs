@@ -13,9 +13,9 @@ namespace Common.LinkNode
             public Node Next { get; set; }
             public Node(K key=default,V value=default,Node node=null)
             {
-                this.Key = key;
-                this.Value = value;
-                this.Next = node;
+                Key = key;
+                Value = value;
+                Next = node;
             }
         }
 
@@ -46,13 +46,13 @@ namespace Common.LinkNode
                 var delNode = preNode.Next;
                 preNode.Next = delNode.Next;
                 delNode.Next = null;
-                this.Size--;
+                Size--;
             }
         }
 
         public int GetSize()
         {
-            return this.Size;
+            return Size;
         }
 
         private Node Find(K key)
@@ -69,13 +69,13 @@ namespace Common.LinkNode
 
         public bool IsContains(K key)
         {
-            var node = this.Find(key);
+            var node = Find(key);
             return node != null;
         }
 
         public void Set(K key, V value)
         {
-            var node = this.Find(key);
+            var node = Find(key);
             if (node == null)
                 return;
             node.Value = value;
@@ -83,7 +83,7 @@ namespace Common.LinkNode
 
         public bool IsEmpty()
         {
-            return this.Size == 0;
+            return Size == 0;
         }
     }
 }

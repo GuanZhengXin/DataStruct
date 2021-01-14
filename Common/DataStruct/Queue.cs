@@ -22,32 +22,32 @@ namespace Common
         private Array<T> Data;
         public Queue(int capacity=20)
         {
-            this.Data = new Array<T>(capacity);
+            Data = new Array<T>(capacity);
         }
 
         public T DeQueue()
         {
-            return this.Data.Delete(0);
+            return Data.Delete(0);
         }
 
         public void EnQueue(T value)
         {
-            this.Data.Add(value);
+            Data.Add(value);
         }
 
         public int GetSize()
         {
-            return this.Data.GetSize();
+            return Data.GetSize();
         }
 
         public bool IsEmpty()
         {
-            return this.GetSize() == 0;
+            return GetSize() == 0;
         }
 
         public T Peek()
         {
-            return this.Data.Search(0);
+            return Data.Search(0);
         }
     }
 }

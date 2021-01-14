@@ -27,6 +27,9 @@ namespace Common.Tree
 
         public void Add(K key, V value)
         {
+            if (IsContains(key))
+                return;
+
             Root = Add(Root, key, value);
         }
 
@@ -131,12 +134,12 @@ namespace Common.Tree
         public bool IsContains(K key)
         {
             var node = FindNode(Root,key);
-            return node!=null;
+            return node != null;
         }
 
         public bool IsEmpty()
         {
-            return this.Size == 0;
+            return Size == 0;
         }
 
         public void Set(K key, V value)
@@ -144,6 +147,7 @@ namespace Common.Tree
             var node = FindNode(Root, key);
             if (node == null)
                 return;
+
             node.Value = value;
         }
     }

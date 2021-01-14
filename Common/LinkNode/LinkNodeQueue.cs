@@ -26,17 +26,17 @@ namespace Common.LinkNode
         public LinkNodeQueue()
         {
             DummyHead = new Node();
-            this.Size = 0;
+            Size = 0;
         }
 
         public int GetSize()
         {
-            return this.Size;
+            return Size;
         }
 
         public bool IsEmpty()
         {
-            return this.Size == 0;
+            return Size == 0;
         }
 
         public void EnQueue(T value)
@@ -51,7 +51,7 @@ namespace Common.LinkNode
                 Tail.Next = new Node(value);
                 Tail = Tail.Next;
             }
-            this.Size++;
+            Size++;
         }
 
         public T DeQueue()
@@ -61,7 +61,7 @@ namespace Common.LinkNode
             var delNode = DummyHead.Next;
             DummyHead.Next = delNode.Next;
             delNode.Next = null;
-            this.Size--;
+            Size--;
             return delNode.Value;
         }
 

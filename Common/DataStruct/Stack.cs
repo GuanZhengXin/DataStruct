@@ -22,32 +22,32 @@ namespace Common
         private Array<T> Data;
         public Stack(int capacity=20)
         {
-            this.Data = new Array<T>(capacity);
+            Data = new Array<T>(capacity);
         }
 
         public void Clear()
         {
-            this.Data.SetEmpty();
+            Data.SetEmpty();
         }
 
         public bool IsEmpty()
         {
-            return this.Data.GetSize() == 0;
+            return Data.GetSize() == 0;
         }
 
         public T Peek()
         {
-            return this.Data.Search(this.Data.GetSize());
+            return Data.Search(Data.GetSize());
         }
 
         public T Pop()
         {
-            return this.Data.Delete(this.Data.GetSize());
+            return Data.Delete(Data.GetSize());
         }
 
         public void Push(T value)
         {
-            this.Data.Add(value);
+            Data.Add(value);
         }
     }
 }

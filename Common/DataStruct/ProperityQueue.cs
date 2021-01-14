@@ -11,7 +11,6 @@ namespace Common
     public class ProperityQueue<T> : IQueue<T> where T :IComparable
     {
         private MaxHeap<T> Data;
-        private int Size => this.GetSize();
 
         public ProperityQueue()
         {
@@ -20,27 +19,27 @@ namespace Common
 
         public T DeQueue()
         {
-            return this.Data.ExecuteMax();
+            return Data.ExecuteMax();
         }
 
         public void EnQueue(T value)
         {
-            this.Data.Add(value);
+            Data.Add(value);
         }
 
         public int GetSize()
         {
-            return this.Data.GetSize();
+            return Data.GetSize();
         }
 
         public bool IsEmpty()
         {
-            return this.Data.IsEmpty();
+            return Data.IsEmpty();
         }
 
         public T Peek()
         {
-            return this.Data.GetMax();
+            return Data.GetMax();
         }
     }
 }

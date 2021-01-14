@@ -16,10 +16,13 @@ namespace DataStruct
             //Console.WriteLine(tree.ToString());
 
             var trie = new Trie();
-            trie.Add("add");
+            trie.Add("application");
             trie.Add("apple");
-            trie.Add("balance");
-            Console.WriteLine(trie);
+            trie.Add("bal");
+            trie.Add("ban");
+            trie.Add("beat");
+            Console.WriteLine(trie.IsRegexMatch("app.e"));
+            trie.Remove("beat");
             #region leetcode
 
             //var res = LeetCodeExtension.TwoSum(new int[] { 1, 4, 6, 8 }, 7);

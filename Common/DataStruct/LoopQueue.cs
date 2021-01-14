@@ -21,26 +21,26 @@ namespace Common
 
         public int GetCapacity()
         {
-            return this.Data.Length - 1;
+            return Data.Length - 1;
         }
 
         public T DeQueue()
         {
             var type = Data[Front];
             Data[Front] = default;
-            Front = (Front + 1) % this.Data.Length;
-            if (this.Size == this.GetCapacity() / 4)
-                this.ReSize(this.GetCapacity() / 2);
+            Front = (Front + 1) % Data.Length;
+            if (Size == GetCapacity() / 4)
+                ReSize(GetCapacity() / 2);
             return type;
         }
 
         public void EnQueue(T value)
         {
-            if ((Tail + 1) % this.Data.Length == Front)
-                ReSize(this.GetCapacity() * 2 + 1);
+            if ((Tail + 1) % Data.Length == Front)
+                ReSize(GetCapacity() * 2 + 1);
             Data[Tail] = value;
-            this.Tail = (this.Tail + 1) % this.Data.Length;
-            this.Size++;
+            Tail = (Tail + 1) % Data.Length;
+            Size++;
         }
 
         private void ReSize(int capacity)
@@ -48,25 +48,25 @@ namespace Common
             var data = new T[capacity];
             for (int i = 0; i < Size; i++)
             {
-                data[i] = this.Data[(i + Front) % this.Data.Length];
+                data[i] = Data[(i + Front) % Data.Length];
             }
-            this.Data = data;
+            Data = data;
             Front = 0;
         }
 
         public int GetSize()
         {
-            return this.Size;
+            return Size;
         }
 
         public bool IsEmpty()
         {
-            return this.Front == this.Tail;
+            return Front == Tail;
         }
 
         public T Peek()
         {
-            return this.Data[Front];
+            return Data[Front];
         }
     }
 }

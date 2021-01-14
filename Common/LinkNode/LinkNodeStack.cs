@@ -14,27 +14,27 @@ namespace Common.LinkNode
 
         public void Clear()
         {
-            this.LinkNode = new SingleLinkNode<T>();
+            LinkNode = new SingleLinkNode<T>();
         }
 
         public bool IsEmpty()
         {
-            return this.LinkNode.IsEmpty();
+            return LinkNode.IsEmpty();
         }
 
         public T Peek()
         {
-            return this.LinkNode.GetLast();
+            return LinkNode.GetLast();
         }
 
         public T Pop()
         {
-            return this.LinkNode.DeleteLast();
+            return LinkNode.DeleteLast();
         }
 
         public void Push(T value)
         {
-            this.LinkNode.AddLast(value);
+            LinkNode.AddLast(value);
         }
     }
 }

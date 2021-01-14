@@ -20,32 +20,35 @@ namespace Common
         private BinarySearchTree<T> Data;
         public BinaryTreeSet()
         {
-            this.Data = new BinarySearchTree<T>();
+            Data = new BinarySearchTree<T>();
         }
 
         public void Add(T value)
         {
-            this.Data.Add(value);
+            if (IsContains(value))
+                return;
+
+            Data.Add(value);
         }
 
         public int GetSize()
         {
-            return this.Data.GetSize();
+            return Data.GetSize();
         }
 
         public bool IsEmpty()
         {
-            return this.Data.IsEmpty();
+            return Data.IsEmpty();
         }
 
         public bool IsContains(T value)
         {
-            return this.Data.IsContains(value);
+            return Data.IsContains(value);
         }
 
         public void Delete(T value)
         {
-            this.Data.Delete(value);
+            Data.Delete(value);
         }
     }
 
@@ -54,33 +57,35 @@ namespace Common
         private SingleLinkNode<T> Data;
         public LinkNodeSet()
         {
-            this.Data = new SingleLinkNode<T>();
+            Data = new SingleLinkNode<T>();
         }
 
         public void Add(T value)
         {
-            if (!IsContains(value))
-                this.Data.AddFirst(value);
+            if (IsContains(value))
+                return;
+
+            Data.AddFirst(value);
         }
 
         public void Delete(T value)
         {
-            this.Data.Delete(value);
+            Data.Delete(value);
         }
 
         public int GetSize()
         {
-            return this.Data.GetSize();
+            return Data.GetSize();
         }
 
         public bool IsContains(T value)
         {
-            return this.Data.IsContains(value);
+            return Data.IsContains(value);
         }
 
         public bool IsEmpty()
         {
-            return this.Data.IsEmpty();
+            return Data.IsEmpty();
         }
     }
 }

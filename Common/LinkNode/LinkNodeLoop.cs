@@ -14,8 +14,8 @@ namespace Common.LinkNode
         private int Size { get; set; }
         public LinkNodeLoop()
         {
-            this.DummyHead = new Node();
-            this.Size = 0;
+            DummyHead = new Node();
+            Size = 0;
         }
 
         public class Node
@@ -60,9 +60,10 @@ namespace Common.LinkNode
             }
             Size++;
         }
+
         public T Get(int index)
         {
-            if (index < 0 || index >= this.Size)
+            if (index < 0 || index >= Size)
                 throw new Exception("index is illegal");
             var currentNode = DummyHead.Next;
             for (int i = 0; i < index; i++)

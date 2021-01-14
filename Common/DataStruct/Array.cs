@@ -13,11 +13,11 @@ namespace Common
         private T[] Data;
         private int Size;
         private int Capacity;
-        public bool IsFull => this.Capacity == this.Size;
+        public bool IsFull => Capacity == Size;
         public Array(int capacity = 20)
         {
-            this.Capacity = capacity;
-            this.Data = new T[this.Capacity];
+            Capacity = capacity;
+            Data = new T[Capacity];
         }
 
         public Array(T[] arr)
@@ -25,27 +25,27 @@ namespace Common
             Data = new T[arr.Length];
             for (int i = 0; i < arr.Length; i++)
             {
-                this.Data[i] = arr[i];
+                Data[i] = arr[i];
             }
             Size = arr.Length;
         }
 
         public int GetSize()
         {
-            return this.Size;
+            return Size;
         }
 
         public void Add(T value)
         {
             if (IsFull)
-                this.ExpandCapacity(this.Capacity * 2);
-            this.Size++;
-            this.Data[this.Size - 1] = value;
+                ExpandCapacity(Capacity * 2);
+            Size++;
+            Data[Size - 1] = value;
         }
 
         public void AddLast(T value)
         {
-            this.Insert(GetSize(), value);
+            Insert(GetSize(), value);
         }
 
         /// <summary>
@@ -74,12 +74,12 @@ namespace Common
         private void ExpandCapacity(int capacity)
         {
             var newData = new T[capacity];
-            for (int i = 0; i < this.Data.Length; i++)
+            for (int i = 0; i < Data.Length; i++)
             {
-                newData[i] = this.Data[i];
+                newData[i] = Data[i];
             }
-            this.Data = newData;
-            this.Capacity = capacity;
+            Data = newData;
+            Capacity = capacity;
         }
 
         public void Insert(int index,T value)
@@ -87,21 +87,21 @@ namespace Common
             if (index < 0)
                 throw new Exception("index is less than zero");
 
-            if (index > this.Capacity-1 || index > this.Size)
+            if (index > Capacity-1 || index > Size)
                 throw new Exception("index is more than capacity or Size");
 
             for (int i = Size-1; i >index-1; i--)
             {
-                this.Data[i + 1] = this.Data[i];
+                Data[i + 1] = Data[i];
             }
-            this.Data[index] = value;
-            this.Size++;
+            Data[index] = value;
+            Size++;
         }
 
         public void SetEmpty()
         {
-            this.Data = new T[this.Capacity];
-            this.Size = default;
+            Data = new T[Capacity];
+            Size = default;
         }
 
         public T Delete(int index)
@@ -109,21 +109,21 @@ namespace Common
             if (index < 0)
                 throw new Exception("index is less than zero");
 
-            if (index > this.Capacity-1)
+            if (index > Capacity-1)
                 throw new Exception("index is more than capacity");
 
-            if (index > this.Size-1)
+            if (index > Size-1)
                 return default;
 
-            var value = this.Data[index];
-            for (int i = index; i < this.Size-1; i++)
+            var value = Data[index];
+            for (int i = index; i < Size-1; i++)
             {
-                this.Data[i] = this.Data[i+1];
+                Data[i] = Data[i+1];
             }
-            this.SetEmpty(this.Size-1);
-            this.Size--;
-            if (this.Size <= this.Capacity/4)
-               this.NarrowCapacity(this.Capacity / 2);
+            SetEmpty(Size-1);
+            Size--;
+            if (Size <= Capacity/4)
+               NarrowCapacity(Capacity / 2);
 
             return value;
         }
@@ -133,28 +133,28 @@ namespace Common
             var newData = new T[capacity];
             for (int i = 0; i < newData.Length; i++)
             {
-                newData[i] = this.Data[i];
+                newData[i] = Data[i];
             }
-            this.Data = newData;
-            this.Capacity = capacity;
+            Data = newData;
+            Capacity = capacity;
         }
 
         private void SetEmpty(int index)
         {
-            this.Data[index] = default;
+            Data[index] = default;
         }
 
         public void DeleteElement(T value)
         {
             var eleIndex = -1;
-            for (int i = 0; i < this.Size; i++)
+            for (int i = 0; i < Size; i++)
             {
-                if (this.Data[i].Equals(value))
+                if (Data[i].Equals(value))
                     eleIndex = i;
             }
             if (eleIndex < 0)
                 return;
-            this.Delete(eleIndex);
+            Delete(eleIndex);
         }
 
         public void Update(int index,T value)
@@ -162,21 +162,21 @@ namespace Common
             if (index < 0)
                 throw new Exception("index is less than zero");
 
-            if (index > this.Capacity - 1)
+            if (index > Capacity - 1)
                 throw new Exception("index is more than capacity");
 
-            if (index > this.Size - 1)
+            if (index > Size - 1)
                 return;
 
-            this.Data[index] = value;
+            Data[index] = value;
         }
 
         public bool IsContain(T value)
         {
             var isContain = false;
-            for (int i = 0; i < this.Size; i++)
+            for (int i = 0; i < Size; i++)
             {
-                if (this.Data[i].Equals(value))
+                if (Data[i].Equals(value))
                     isContain = true;
             }
             return isContain;
@@ -184,9 +184,9 @@ namespace Common
 
         public int Find(T value)
         {
-            for (int i = 0; i < this.Size; i++)
+            for (int i = 0; i < Size; i++)
             {
-                if (this.Data[i].Equals(value))
+                if (Data[i].Equals(value))
                     return i;
             }
             return -1;
@@ -196,22 +196,22 @@ namespace Common
         {
             if(index>Size-1 || index<0)
                 throw new Exception("this index is empty or index is less than zero");
-            return this.Data[index];
+            return Data[index];
         }
 
         public override string ToString()
         {
             var list = new List<T>();
-            for (int i = 0; i < this.Size; i++)
+            for (int i = 0; i < Size; i++)
             {
-                list.Add(this.Data[i]);
+                list.Add(Data[i]);
             }
-            return $"Use {this.Size}, Capacity {this.Capacity} Numbers is {string.Join(",", list.Select(i => i))}";
+            return $"Use {Size}, Capacity {Capacity} Numbers is {string.Join(",", list.Select(i => i))}";
         }
 
         public bool IsEmpty()
         {
-            return this.Size == 0;
+            return Size == 0;
         }
     }
 }
