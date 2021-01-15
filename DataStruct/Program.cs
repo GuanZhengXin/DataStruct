@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Common;
+using Common.Alg;
 using Common.Tree;
 
 namespace DataStruct
@@ -15,14 +17,19 @@ namespace DataStruct
             //var tree = new SegmentTree<int>(nums, new IntMerger());
             //Console.WriteLine(tree.ToString());
 
-            var trie = new Trie();
-            trie.Add("application");
-            trie.Add("apple");
-            trie.Add("bal");
-            trie.Add("ban");
-            trie.Add("beat");
-            Console.WriteLine(trie.IsRegexMatch("app.e"));
-            trie.Remove("beat");
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            var res = StringAlg.BF("abcdefghijklmnopqrstuvwxyz123456789acjitfhqrwyyylmvczxllouophjtyfghcvbnmllaitfvnjkvcdetyikhgdxvbjrswrubxklggczaqwersdfgxcb", "hjtyfghcvbnmllaitfvnjkvcdetyikhgdxvbjrswrubxklggc");
+            stopWatch.Stop();
+            Console.WriteLine($"BF结果:{res},{stopWatch.Elapsed}");
+
+            stopWatch.Start();
+            res = StringAlg.RK("abcdefghijklmnopqrstuvwxyz123456789acjitfhqrwyyylmvczxllouophjtyfghcvbnmllaitfvnjkvcdetyikhgdxvbjrswrubxklggczaqwersdfgxcb", "hjtyfghcvbnmllaitfvnjkvcdetyikhgdxvbjrswrubxklggc");
+            stopWatch.Stop();
+            Console.WriteLine($"RK结果:{res},{stopWatch.Elapsed}");
+
+
+
             #region leetcode
 
             //var res = LeetCodeExtension.TwoSum(new int[] { 1, 4, 6, 8 }, 7);

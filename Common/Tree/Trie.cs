@@ -5,7 +5,7 @@ using System.Text;
 namespace Common.Tree
 {
     /// <summary>
-    /// 字典树 n叉树 这里是字符（相当于单词表)
+    /// 字典树(前缀树) n叉树 这里是字符（相当于单词表)
     /// </summary>
     public class Trie
     {
@@ -147,14 +147,13 @@ namespace Common.Tree
                 return;
 
             var currentNode = Root;
-            var currentPreNode = default(TrieNode);
             var markNode = Root;
             char removeChar = default;
             var isStop = false;
             for (int i = 0; i < word.Length; i++)
             {
                 var c = word[i];
-                currentPreNode = currentNode;
+                TrieNode currentPreNode = currentNode;
                 currentNode = currentNode.Next.GetValueOrDefault(c);
                 if (currentNode.Next.Count == 1 && !isStop)
                 {
