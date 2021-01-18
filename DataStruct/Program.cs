@@ -19,15 +19,9 @@ namespace DataStruct
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            var res = StringAlg.BF("abcdefghijklmnopqrstuvwxyz123456789acjitfhqrwyyylmvczxllouophjtyfghcvbnmllaitfvnjkvcdetyikhgdxvbjrswrubxklggczaqwersdfgxcb", "hjtyfghcvbnmllaitfvnjkvcdetyikhgdxvbjrswrubxklggc");
+            var res = StringAlg.BM("abcacabcbcbacabc", "cbacabc");
             stopWatch.Stop();
-            Console.WriteLine($"BF结果:{res},{stopWatch.Elapsed}");
-
-            stopWatch.Start();
-            res = StringAlg.RK("abcdefghijklmnopqrstuvwxyz123456789acjitfhqrwyyylmvczxllouophjtyfghcvbnmllaitfvnjkvcdetyikhgdxvbjrswrubxklggczaqwersdfgxcb", "hjtyfghcvbnmllaitfvnjkvcdetyikhgdxvbjrswrubxklggc");
-            stopWatch.Stop();
-            Console.WriteLine($"RK结果:{res},{stopWatch.Elapsed}");
-
+            Console.WriteLine($"BM结果:{res},{stopWatch.Elapsed}");
 
 
             #region leetcode
