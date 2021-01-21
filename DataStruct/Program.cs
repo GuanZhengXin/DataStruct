@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Common;
 using Common.Alg;
@@ -17,11 +18,11 @@ namespace DataStruct
             //var tree = new SegmentTree<int>(nums, new IntMerger());
             //Console.WriteLine(tree.ToString());
 
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            var res = StringAlg.BM("abcacabcbcbacabc", "cbacabc");
-            stopWatch.Stop();
-            Console.WriteLine($"BM结果:{res},{stopWatch.Elapsed}");
+            //var stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            //var res = StringAlg.BM("abcacabcbcbacabc", "cbacabc");
+            //stopWatch.Stop();
+            //Console.WriteLine($"BM结果:{res},{stopWatch.Elapsed}");
 
 
             #region leetcode
@@ -34,8 +35,115 @@ namespace DataStruct
             //int[] a  = { 1, 2, 3};
             //LeetCodeExtension.PrintPermutations(a,3);
             #endregion
+
+            var datas = new List<TestData>
+            { 
+                new TestData{ Id = 1, ParentId = 0, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 2, ParentId = 1, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 3, ParentId = 1, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 4, ParentId = 3, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 5, ParentId = 3, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 6, ParentId = 3, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 7, ParentId = 1, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 8, ParentId = 7, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 9, ParentId = 8, Name=$"aa{new Random().Next(20)}"},
+                new TestData{ Id = 10, ParentId = 8, Name=$"aa{new Random().Next(20)}"},
+            };
+            var tree = new TestTree();
+            foreach (var data in datas)
+            {
+                tree.Add(data);
+            }
         }
 
+        public class TestData 
+        {
+            public int Id { get; set; }
+
+            public int ParentId { get; set; }
+
+            public string Name { get; set; }
+        }
+
+        public class TestDataComparer : IEqualityComparer<TestData>
+        {
+            public bool Equals([AllowNull] TestData x, [AllowNull] TestData y)
+            {
+                return x.Id == y.Id;
+            }
+
+            public int GetHashCode([DisallowNull] TestData obj)
+            {
+                return obj.Id.GetHashCode();
+            }
+        }
+
+        public class TestTree
+        {
+
+            public TestTree()
+            {
+                Root = new TestTreeNode();
+                Root.Id = 0;
+            }
+
+            public class TestTreeNode
+            {
+                public TestTreeNode()
+                {
+                    ChildrenDict = new Dictionary<TestData, TestTreeNode>();
+                }
+
+                public int Id { get; set; }
+
+                public Dictionary<TestData, TestTreeNode> ChildrenDict { get; set; }
+            }
+
+            public TestTreeNode Root { get; set; }
+
+            public int Size { get; set; }
+
+            /// <summary>
+            /// 添加一个data
+            /// </summary>
+            /// <param name="value"></param>
+            public void Add(TestData data)
+            {
+                var currentNode = Root;
+                while (currentNode.ChildrenDict.Count!=0)
+                {
+                    if(currentNode.Id == data.ParentId)
+                        currentNode.ChildrenDict.Add(data, new TestTreeNode());
+
+                    foreach (var item in currentNode.ChildrenDict)
+                    {
+
+                    }
+                }
+
+                Size++;
+            }
+
+            public void AddTest(TestData data)
+            {
+                GetTestTreeNode(Root, data);
+            }
+
+            private void GetTestTreeNode(TestTreeNode node, TestData data)
+            {
+                if (node.Id == data.ParentId)
+                {
+                    node.ChildrenDict.Add(data, new TestTreeNode());
+                    return;
+                }
+
+                foreach (var key in node.ChildrenDict.Keys)
+                {
+                    GetTestTreeNode(node.ChildrenDict.GetValueOrDefault(key), data);
+                }
+                
+            }
+        }
 
         public class IntMerger : IMerger<int>
         {
