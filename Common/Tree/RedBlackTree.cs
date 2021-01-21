@@ -88,8 +88,8 @@ namespace Common.Tree
         {
             var rightNode = node.Right;
             var leftNode = node.Right?.Left;
-            node.Right = leftNode;
             rightNode.Left = node;
+            node.Right = leftNode;
             return rightNode;
         }
 
@@ -102,8 +102,8 @@ namespace Common.Tree
         {
             var leftNode = node.Left;
             var rightNode = node.Left?.Right;
-            node.Left = rightNode;
             leftNode.Right = node;
+            node.Left = rightNode;
             return leftNode;
         }
 
