@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Common;
 using Common.Alg;
+using Common.DataStruct;
 using Common.Tree;
 
 namespace DataStruct
@@ -24,6 +25,15 @@ namespace DataStruct
             //stopWatch.Stop();
             //Console.WriteLine($"BM结果:{res},{stopWatch.Elapsed}");
 
+
+            var hashMap = new HashMap<string,string>();
+            hashMap.Set("aasdsfdasfasf", "hello");
+            hashMap.Set("145asffgujh", "world");
+            hashMap.Set("44678bnm", "today");
+
+            Console.WriteLine(hashMap.Get("aasdsfdasfasf"));
+            Console.WriteLine(hashMap.Get("145asffgujh"));
+            Console.WriteLine(hashMap.Get("44678bnm"));
 
             #region leetcode
 
