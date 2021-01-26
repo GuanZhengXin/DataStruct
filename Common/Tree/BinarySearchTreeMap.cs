@@ -150,5 +150,14 @@ namespace Common.Tree
 
             node.Value = value;
         }
+
+        public V Get(K key)
+        {
+            var node = FindNode(Root, key);
+            if (node == null)
+                return default;
+
+            return node.Value;
+        }
     }
 }

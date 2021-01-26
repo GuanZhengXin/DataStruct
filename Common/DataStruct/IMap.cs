@@ -12,5 +12,6 @@ namespace Common
         void Set(K key, V value);
         void Delete(K key);
         bool IsEmpty();
+        V Get(K key);
     }
 }
