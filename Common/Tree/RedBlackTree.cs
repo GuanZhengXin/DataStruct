@@ -41,41 +41,45 @@ namespace Common.Tree
         }
 
         /// <summary>
+        /// 得到节点个数
+        /// </summary>
+        /// <returns></returns>
+        public int GetSize()
+        {
+            return Size;
+        }
+
+        /// <summary>
         /// 添加节点
         /// </summary>
         /// <param name="value"></param>
         public void Add(T value)
         {
-            if (Size != 0)
-                Root = Add(Root, value, TreeNodeColor.Red);
-            else
-                Root = new TreeNode(value, default, default, TreeNodeColor.Black);
-            Size++;
+            Root = Add(Root, value);
+            Root.Color = TreeNodeColor.Black;
         }
 
-        private TreeNode Add(TreeNode node,T value, TreeNodeColor color = TreeNodeColor.Red)
+        private TreeNode Add(TreeNode node,T value)
         {
             if (node == null)
-                return new TreeNode(value,default,default,color);
+                return new TreeNode(value,default,default, TreeNodeColor.Red);
 
             if (node.Value.CompareTo(value) > 0)
-            {
-                if (node.Left == null && node.Color != TreeNodeColor.Black)
-                {
-                    // todo
-                    Console.WriteLine("need digest");
-                }
                 node.Left = Add(node.Left, value);
-            }
-            else
-            {
-                if (node.Right == null && node.Color != TreeNodeColor.Black)
-                {
-                    // todo
-                    Console.WriteLine("need digest");
-                }
+            else if (node.Value.CompareTo(value) < 0)
                 node.Right = Add(node.Right, value);
-            }
+            else
+                node.Value = value;
+
+            if (node.Right.Color == TreeNodeColor.Red && node.Left.Color != TreeNodeColor.Red)
+                node = RotateLeft(node);
+
+            if (node.Left.Color == TreeNodeColor.Red && node.Left.Left.Color == TreeNodeColor.Red)
+                node = RotateRight(node);
+
+            if (node.Left.Color == TreeNodeColor.Red && node.Right.Color == TreeNodeColor.Red)
+                node = FlipColors(node);
+
             return node;
         }
 
@@ -88,8 +92,10 @@ namespace Common.Tree
         {
             var rightNode = node.Right;
             var leftNode = node.Right?.Left;
-            rightNode.Left = node;
             node.Right = leftNode;
+            rightNode.Left = node;
+            rightNode.Color = node.Color;
+            node.Color = TreeNodeColor.Red;
             return rightNode;
         }
 
@@ -102,25 +108,28 @@ namespace Common.Tree
         {
             var leftNode = node.Left;
             var rightNode = node.Left?.Right;
-            leftNode.Right = node;
             node.Left = rightNode;
+            leftNode.Right = node;
+            leftNode.Color = node.Color;
+            node.Color = TreeNodeColor.Red;
             return leftNode;
         }
 
-        public void PreOrder()
-        {
-            PreOrder(Root);
-        }
-
-        public void PreOrder(TreeNode node)
+        /// <summary>
+        /// 反转颜色
+        /// </summary>
+        /// <param name="node"></param>
+        private TreeNode FlipColors(TreeNode node)
         {
             if (node == null)
-                return;
+                return default;
 
-            Console.WriteLine($"value:{node.Value},color:{Enum.GetName(typeof(TreeNodeColor),node.Color)}");
-            PreOrder(node.Left);
-            PreOrder(node.Right); 
+            node.Color = TreeNodeColor.Red;
+            node.Left.Color = TreeNodeColor.Black;
+            node.Right.Color = TreeNodeColor.Black;
+            return node;
         }
+
     }
 
 }
