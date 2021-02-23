@@ -26,14 +26,14 @@ namespace DataStruct
             //Console.WriteLine($"BM结果:{res},{stopWatch.Elapsed}");
 
 
-            var hashMap = new HashMap<string,string>();
-            hashMap.Set("aasdsfdasfasf", "hello");
-            hashMap.Set("145asffgujh", "world");
-            hashMap.Set("44678bnm", "today");
+            //var hashMap = new HashMap<string,string>();
+            //hashMap.Set("aasdsfdasfasf", "hello");
+            //hashMap.Set("145asffgujh", "world");
+            //hashMap.Set("44678bnm", "today");
 
-            Console.WriteLine(hashMap.Get("aasdsfdasfasf"));
-            Console.WriteLine(hashMap.Get("145asffgujh"));
-            Console.WriteLine(hashMap.Get("44678bnm"));
+            //Console.WriteLine(hashMap.Get("aasdsfdasfasf"));
+            //Console.WriteLine(hashMap.Get("145asffgujh"));
+            //Console.WriteLine(hashMap.Get("44678bnm"));
 
             #region leetcode
 
@@ -45,7 +45,67 @@ namespace DataStruct
             //int[] a  = { 1, 2, 3};
             //LeetCodeExtension.PrintPermutations(a,3);
             #endregion
+
+
+
+            TestRe(typeof(People));
+
+
+
+
+
+
+
+
         }
+
+        public static void TestRe(Type type)
+        {
+            var tt = type.GetType();
+            Console.WriteLine($"{nameof(tt.Name)}:{tt.Name}");   //数据类型名
+            Console.WriteLine($"{nameof(tt.FullName)}:{tt.FullName}");    //数据类型的完全限定名(包括命名空间名)
+            Console.WriteLine($"{nameof(tt.Namespace)}:{tt.Namespace}");    //定义数据类型的命名空间名
+            Console.WriteLine($"{nameof(tt.IsAbstract)}:{tt.IsAbstract}");  //指示该类型是否是抽象类型
+            Console.WriteLine($"{nameof(tt.IsArray)}:{tt.IsArray}");      //指示该类型是否是数组
+            Console.WriteLine($"{nameof(tt.IsClass)}:{tt.IsClass}");           //指示该类型是否是类
+            Console.WriteLine($"{nameof(tt.IsEnum)}:{tt.IsEnum}");      //指示该类型是否是枚举
+            Console.WriteLine($"{nameof(tt.IsInterface)}:{tt.IsInterface}");   // 指示该类型是否是接口
+            Console.WriteLine($"{nameof(tt.IsPublic)}:{tt.IsPublic}");     //指示该类型是否是公有的
+            Console.WriteLine($"{nameof(tt.IsSealed)}:{tt.IsSealed}");    //指示该类型是否是密封类
+            Console.WriteLine($"{nameof(tt.IsValueType)}:{tt.IsValueType}");  //指示该类型是否是值类型
+
+
+            foreach (var pro in tt.GetProperties())
+            {
+                Console.WriteLine($"{nameof(pro.IsCollectible)}:{pro.IsCollectible}");  //获取一个值,该值指示此 MemberInfo 对象是否是包含在可回收的 AssemblyLoadContext 中的程序集的一部分
+            }
+
+            var p = Activator.CreateInstance(type);
+
+
+            Console.WriteLine("Success");
+        }
+
+        public interface IPeople
+        {
+            void SayHello(string msg);
+        }
+
+        public class People : IPeople
+        {
+            public void SayHello(string msg)
+            {
+                Console.WriteLine($"{msg}");
+            }
+
+            public string Name { get; set; }
+
+            public int Age { get; set; }
+
+            public char Gender { get; set; }
+        }
+
+
 
         public class IntMerger : IMerger<int>
         {
