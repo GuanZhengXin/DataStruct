@@ -85,5 +85,14 @@ namespace Common.LinkNode
         {
             return Size == 0;
         }
+
+        public V Get(K key)
+        {
+            var node = Find(key);
+            if (node == null)
+                return default;
+
+            return node.Value;
+        }
     }
 }
