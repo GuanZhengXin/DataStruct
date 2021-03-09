@@ -7,7 +7,9 @@ using System.Text;
 using Common;
 using Common.Alg;
 using Common.DataStruct;
+using Common.LinkNode;
 using Common.Tree;
+using Newtonsoft.Json;
 
 namespace DataStruct
 {
@@ -47,17 +49,65 @@ namespace DataStruct
             #endregion
 
 
+            var node = new SingleLinkNode<int>();
+            for (int i = 0; i < 10; i++)
+            {
+                node.AddFirst(i);
+            }
 
-            TestRe(typeof(People));
+            foreach (var item in node)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.ReadKey();
+            //TestRe(typeof(People));
 
 
-
-
-
+            //var nums = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            ////var str = JsonConvert.SerializeObject(nums);
+            //var str = JsonConvert1.Serilize(nums);
+            //Console.WriteLine(str);
 
 
 
         }
+
+
+        public class JsonConvert1
+        {
+            public static string Serilize(object? obj)
+            {
+                if (obj == null)
+                    return null;
+
+                var type = obj.GetType();
+                if (type.IsValueType)
+                {
+                    return obj.ToString();
+                }
+
+                //typeof(IList).IsAssignableFrom(fieldType)
+                if (type.IsAssignableFrom(typeof(IEnumerable)))
+                {
+                    return "继承了IEnumerable";
+                }
+
+                if (type.IsArray)
+                {
+                    var eleType = type.GetElementType();
+                }
+
+                if (type.IsClass)
+                {
+                    return "class";
+                }
+
+                return string.Empty;
+            }
+        }
+
+
 
         public static void TestRe(Type type)
         {

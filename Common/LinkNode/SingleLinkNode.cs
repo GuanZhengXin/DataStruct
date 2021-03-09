@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace Common.LinkNode
     /// 单链表
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SingleLinkNode<T>
+    public class SingleLinkNode<T> : IEnumerable<T>
     {
         private class Node
         {
@@ -131,7 +132,7 @@ namespace Common.LinkNode
         {
             var currentNode = DummyHead.Next;
             Node prev = null;
-            while (currentNode!=null)
+            while (currentNode != null)
             {
                 var nextNode = new Node(currentNode.Value, currentNode.Next);
                 currentNode.Next = prev;
@@ -181,6 +182,21 @@ namespace Common.LinkNode
             }
             build.Append("Null");
             return build.ToString();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var currentNode = DummyHead.Next;
+            while (currentNode != null)
+            {
+                yield return currentNode.Value;
+                currentNode = currentNode.Next;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
