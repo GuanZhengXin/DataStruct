@@ -113,23 +113,23 @@ namespace Common.Alg
             var currentIndex = 0;
             var suffix = new int[subStr.Length];
             var prefix = new bool[subStr.Length];
-            GenerateGS(subStr,ref suffix,ref prefix);
+            GenerateGS(subStr, ref suffix, ref prefix);
             while (currentIndex <= mainStr.Length - subStr.Length)
             {
                 int badIndex;
                 for (badIndex = subStr.Length - 1; badIndex >= 0; --badIndex)
                 {
                     if (mainStr[currentIndex + badIndex] != subStr[badIndex])
-                        break; 
+                        break;
                 }
 
                 if (badIndex < 0)
                     return true;
 
-                int badRegMap = badIndex - GetBadRegMap(mainStr,subStr,badIndex, badIndex + currentIndex);
+                int badRegMap = badIndex - GetBadRegMap(mainStr, subStr, badIndex, badIndex + currentIndex);
                 int goodRegMap = 0;
                 if (badIndex < subStr.Length - 1)
-                    goodRegMap = GetMapByGS(badIndex,subStr.Length, suffix, prefix);
+                    goodRegMap = GetMapByGS(badIndex, subStr.Length, suffix, prefix);
 
                 currentIndex += Math.Max(badRegMap, goodRegMap);
             }
@@ -151,7 +151,7 @@ namespace Common.Alg
             if (suffix[k] != -1)
                 return badIndex - suffix[k] + 1;
 
-            for (int r = badIndex + 2; r <= subStrLength-1; ++r)
+            for (int r = badIndex + 2; r <= subStrLength - 1; ++r)
             {
                 if (prefix[subStrLength - r])
                     return r;
@@ -166,11 +166,11 @@ namespace Common.Alg
         /// <param name="subStr"></param>
         /// <param name="suffix"></param>
         /// <param name="prefix"></param>
-        private static void GenerateGS(string subStr,ref int[] suffix,ref bool[] prefix)
+        private static void GenerateGS(string subStr, ref int[] suffix, ref bool[] prefix)
         {
             var subStrLength = subStr.Length;
             for (int i = 0; i < subStrLength; ++i)
-            { 
+            {
                 suffix[i] = -1;
                 prefix[i] = false;
             }
@@ -196,7 +196,7 @@ namespace Common.Alg
         /// <param name="badIndex"></param>
         /// <param name="mainIndex"></param>
         /// <returns></returns>
-        private static int GetBadRegMap(string mainStr,string subStr,int badIndex,int mainIndex)
+        private static int GetBadRegMap(string mainStr, string subStr, int badIndex, int mainIndex)
         {
             return badIndex - FindLstPos(subStr, mainStr[mainIndex]);
         }
@@ -219,5 +219,57 @@ namespace Common.Alg
             return index;
         }
 
+        /// <summary>
+        /// kmp算法
+        /// </summary>
+        /// <param name="mainStr"></param>
+        /// <param name="subStr"></param>
+        /// <returns></returns>
+        public static int KMP(string mainStr, string subStr)
+        {
+            var next = GetNextNums(subStr);
+            var j = 0;
+            for (int i = 0; i < mainStr.Length; i++)
+            {
+                while (j > 0 && mainStr[i] != subStr[j])
+                {
+                    j = next[j - 1] + 1;
+                }
+
+                if (mainStr[i] == subStr[j])
+                    j++;
+
+                if (j == mainStr.Length)
+                    return i - mainStr.Length + 1;
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// 数组的下标是每个前缀结尾字符下标，数组的值是这个前缀的最长可以匹配前缀子串的结尾字符下标。
+        /// 比如  a b a   next[3] = 0   ;   a b a b a netx[5] = 2
+        /// </summary>
+        /// <param name="subStr"></param>
+        /// <returns></returns>
+        public static int[] GetNextNums(string subStr)
+        {
+            int[] next = new int[subStr.Length];
+            next[0] = -1;
+            int k = -1;
+            for (int i = 1; i < subStr.Length; ++i)
+            {
+                while (k != -1 && subStr[k + 1] != subStr[i])
+                {
+                    k = next[k];
+                }
+
+                if (subStr[k + 1] == subStr[i])
+                    ++k;
+
+                next[i] = k;
+            }
+            return next;
+        }
     }
 }

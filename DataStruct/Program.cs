@@ -49,18 +49,18 @@ namespace DataStruct
             #endregion
 
 
-            var node = new SingleLinkNode<int>();
-            for (int i = 0; i < 10; i++)
-            {
-                node.AddFirst(i);
-            }
+            //var node = new SingleLinkNode<int>();
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    node.AddFirst(i);
+            //}
 
-            foreach (var item in node)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in node)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
-            Console.ReadKey();
+            //Console.ReadKey();
             //TestRe(typeof(People));
 
 
@@ -70,7 +70,7 @@ namespace DataStruct
             //Console.WriteLine(str);
 
 
-
+            StringAlg.KMP("ababacd","ababac");
         }
 
 
