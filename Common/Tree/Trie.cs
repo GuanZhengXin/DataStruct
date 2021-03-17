@@ -19,7 +19,7 @@ namespace Common.Tree
 
             public Dictionary<char, TrieNode> Next { get; set; }
 
-            public bool IsFind{ get; set; }
+            public bool IsFind { get; set; }
         }
 
         public TrieNode Root { get; set; }
@@ -42,7 +42,7 @@ namespace Common.Tree
             {
                 var c = word[i];
                 if (!currentNode.Next.ContainsKey(c))
-                    currentNode.Next.Add(c,new TrieNode());
+                    currentNode.Next.Add(c, new TrieNode());
 
                 currentNode = currentNode.Next.GetValueOrDefault(c);
             }
@@ -51,7 +51,7 @@ namespace Common.Tree
             {
                 currentNode.IsFind = true;
                 Size++;
-            }                
+            }
         }
 
         /// <summary>
@@ -109,10 +109,10 @@ namespace Common.Tree
         /// <returns></returns>
         public bool IsRegexMatch(string word)
         {
-            return Match(Root,word,0);
+            return Match(Root, word, 0);
         }
 
-        private bool Match(TrieNode node,string word,int index)
+        private bool Match(TrieNode node, string word, int index)
         {
             if (index == word.Length)
                 return node.IsFind;

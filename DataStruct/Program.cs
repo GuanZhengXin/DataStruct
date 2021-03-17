@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using Common;
 using Common.Alg;
 using Common.DataStruct;
 using Common.LinkNode;
 using Common.Tree;
+using Fleck;
 using Newtonsoft.Json;
 
 namespace DataStruct
@@ -70,7 +72,55 @@ namespace DataStruct
             //Console.WriteLine(str);
 
 
-            StringAlg.KMP("ababacd","ababac");
+            ////StringAlg.KMP("ababacd","ababac");
+
+
+            //var allScokets = new List<IWebSocketConnection>();
+            //var server = new WebSocketServer("ws://192.168.1.10:2021");    //创建webscoket服务端实例
+            //server.Start(scoket =>
+            //{
+            //    scoket.OnOpen = () =>
+            //    {
+            //        Console.WriteLine("项目 Open");
+            //        allScokets.Add(scoket);
+            //    };
+
+            //    scoket.OnClose = () =>
+            //    {
+            //        Console.WriteLine("项目 Close");
+            //        allScokets.Remove(scoket);
+            //    };
+
+            //    scoket.OnMessage = message =>
+            //    {
+            //        Console.WriteLine(message);
+            //        allScokets.ToList().ForEach(s => s.Send(message));
+            //    };
+
+            //});
+
+            //var input = Console.ReadLine();
+            //while (input != "exit")
+            //{
+            //    foreach (var socket in allScokets.ToList())
+            //    {
+            //        socket.Send("服务端：" + input);
+            //    }
+            //    input = Console.ReadLine();
+            //}
+
+
+
+            var ac = new AcAutomatonTrie();
+
+            ac.Add("我是良好市民");
+            ac.Add("你好啊");
+            ac.Add("sb");
+            ac.Add("狗");
+
+            ac.BuildFailurePointer();
+
+            ac.Match("dsdb");
         }
 
 
