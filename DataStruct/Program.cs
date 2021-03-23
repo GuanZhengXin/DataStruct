@@ -111,16 +111,14 @@ namespace DataStruct
 
 
 
-            var ac = new AcAutomatonTrie();
+            //var ac = new AcAutomatonTrie();
 
-            ac.Add("我是良好市民");
-            ac.Add("你好啊");
-            ac.Add("sb");
-            ac.Add("狗");
 
-            ac.BuildFailurePointer();
+            var queen = new EightQueen();
 
-            ac.Match("dsdb");
+            queen.Cal8Queens(0);
+
+
         }
 
 
